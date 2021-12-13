@@ -14,8 +14,7 @@ const {
 function renderToHtml(array, filterString = false, dashboardBoolean = false) {
 	try {
 		const cardsContainer = document.querySelector(".cards__container");
-		//* Check if page is dashboard
-		const dashboardBoolean = window.location.href.includes("dashboard.html");
+
 		//* If called by search inputs, filter the contents of the array
 		if (filterString) {
 			array = searchArray(array, filterString);

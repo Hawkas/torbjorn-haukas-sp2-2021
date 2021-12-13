@@ -9,8 +9,6 @@ import { emptyApi } from "./staticErrorMessage.js";
 const { itemKeyName, itemKeyAuthor, itemKeyContent } = apiPropertyKeys;
 const modal = document.querySelector(".modal");
 
-//! I'm using bootstrap's modals here under the assumption that bootstrap is allowed in its entirety. If it isn't I'm screwed, but it's only for the level 2 parts of the assignment, so I'll still pass.. I hope?
-
 const myModal = new bootstrap.Modal(document.querySelector("#staticBackdrop"), {
 	keyboard: false,
 });
