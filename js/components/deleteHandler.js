@@ -12,18 +12,18 @@ const deleteHandler = function () {
 		button.addEventListener("click", async function () {
 			const id = this.dataset.id;
 			try {
-				let response = await axios.delete(`${BASE_URL}/articles/${id}`, headers);
+				let response = await axios.delete(`${BASE_URL}/products/${id}`, headers);
 				favouriteCleanser({ id });
 				setTimeout(async function () {
-					let articlesArray = await fetchData(`${BASE_URL}/articles`);
+					let productsArray = await fetchData(`${BASE_URL}/products`);
 					try {
-						renderToHtml(articlesArray);
+						renderToHtml(productsArray);
 					} catch (error) {
 						console.log(error);
 						emptyApi();
 					}
 
-					addSearchFunctionality(articlesArray);
+					addSearchFunctionality(productsArray);
 					alert("alert-success", "Article successfully deleted :)");
 				}, 200);
 			} catch (error) {

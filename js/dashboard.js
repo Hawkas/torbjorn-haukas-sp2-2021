@@ -13,12 +13,12 @@ pageLoader.style.display = "none";
 adjustMenu();
 welcomeMsg.innerHTML = `Welcome, ${user.username}`;
 try {
-	let articlesArray = await fetchData(`${BASE_URL}/articles`);
+	let productsArray = await fetchData(`${BASE_URL}/products`);
 	dashboardModal();
 	try {
-		renderToHtml(articlesArray);
+		renderToHtml(productsArray, false, true);
 		// Add functionality for search inputs and suggestions list
-		addSearchFunctionality(articlesArray);
+		addSearchFunctionality(productsArray);
 		// Render all items in API call to DOM and add handlers
 	} catch (error) {
 		emptyApi();

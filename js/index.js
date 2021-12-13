@@ -8,12 +8,12 @@ import { BASE_URL } from "./settings.js";
 adjustMenu();
 
 try {
-	let articlesArray = await fetchData(`${BASE_URL}/articles`);
+	let productsArray = await fetchData(`${BASE_URL}/products`);
 
 	try {
-		renderToHtml(articlesArray);
+		renderToHtml(productsArray);
 		// Add functionality for search inputs and suggestions list
-		addSearchFunctionality(articlesArray);
+		addSearchFunctionality(productsArray);
 		// Render all items in API call to DOM
 	} catch (error) {
 		console.log(error);

@@ -43,14 +43,14 @@ function validatePayload(title, author, summary) {
 }
 function renderDashboard() {
 	setTimeout(async function () {
-		let articlesArray = await fetchData(`${BASE_URL}/articles`);
+		let productsArray = await fetchData(`${BASE_URL}/products`);
 		try {
-			renderToHtml(articlesArray);
+			renderToHtml(productsArray);
 		} catch (error) {
 			console.log(error);
 			emptyApi();
 		}
-		addSearchFunctionality(articlesArray);
+		addSearchFunctionality(productsArray);
 		myModal.hide();
 		alert("alert-success", "Success!");
 	}, 200);
@@ -75,9 +75,9 @@ const dashboardModal = function () {
 					const newArticle = validatePayload(inputTitle, inputAuthor, inputSummary);
 					//* If the input values validate
 					if (newArticle !== false) {
-						const response = await axios.post(`${BASE_URL}/articles`, newArticle, headers);
+						const response = await axios.post(`${BASE_URL}/products`, newArticle, headers);
 						// console.log(response);
-						//* Render the articles again to reflect changes.
+						//* Render the products again to reflect changes.
 						renderDashboard();
 					} else {
 						//* But if the inputs don't validate, show this alert.
@@ -93,7 +93,7 @@ const dashboardModal = function () {
 			let id = invokerButton.dataset.id;
 			try {
 				//* Make a request for an article using the above ID
-				const { title, author, summary } = await fetchData(`${BASE_URL}/articles/${id}`);
+				const { title, author, summary } = await fetchData(`${BASE_URL}/products/${id}`);
 				modalTitle.innerHTML = `Editing "${title}"`;
 				modalButton.innerHTML = "Save changes";
 				inputTitle.value = title;
@@ -104,7 +104,7 @@ const dashboardModal = function () {
 					try {
 						const updatedArticle = validatePayload(inputTitle, inputAuthor, inputSummary);
 						if (updatedArticle !== false) {
-							const response = await axios.put(`${BASE_URL}/articles/${id}`, updatedArticle, headers);
+							const response = await axios.put(`${BASE_URL}/products/${id}`, updatedArticle, headers);
 							renderDashboard();
 						} else {
 							alert("alert-danger", "Please fill all inputs", modalAlert);

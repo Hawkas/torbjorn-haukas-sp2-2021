@@ -30,7 +30,7 @@ export const filterFromFavourites = function (array, localStorageArray) {
 	});
 };
 
-//* To remove articles from favourites when they are deleted from the API
+//* To remove products from favourites when they are deleted from the API
 export const favouriteCleanser = function (localStorageObject) {
 	let favourites = getFromStorage("favourites");
 	let isInStorage = favourites.find((object) => parseInt(object.id) === parseInt(localStorageObject.id));

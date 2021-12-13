@@ -24,6 +24,6 @@ export const apiError = function () {
 export const emptyApi = function () {
 	cardsContainer.innerHTML = `
         <div class="col flex-fill">
-            <h3 class="alert alert-info">It seems the API's ran out of articles. Why would you delete all the articles?</h3>
+            <h3 class="alert alert-info">It seems the API's ran out of products. Why would you delete all the products?</h3>
         </div>`;
 };

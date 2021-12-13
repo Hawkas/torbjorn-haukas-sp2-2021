@@ -4,16 +4,16 @@
 
 //* I will only be adding property keys I want to access in the api.
 
-const itemKeyName = "title";
-const itemKeyAuthor = "author";
-const itemKeyContent = "summary";
+const itemKeyName = "Title";
+const itemKeyAuthor = "Creator";
+const itemKeyContent = "Description";
 // const itemKeyPublished = "";
 // const itemKeyCategory = "";
-// const itemKeyPrice = "";
+const itemKeyPrice = "Price";
 
-export const apiPropertyKeys = { itemKeyName, itemKeyAuthor, itemKeyContent };
+export const apiPropertyKeys = { itemKeyName, itemKeyAuthor, itemKeyContent, itemKeyPrice };
 
-export const BASE_URL = `http://localhost:1337`;
+export const BASE_URL = `https://ethereal-strapi.herokuapp.com`;
 
 export const headers = {
 	headers: {

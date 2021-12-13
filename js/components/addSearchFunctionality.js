@@ -10,13 +10,13 @@ const form = document.querySelector(".navbar__search");
 const suggestionList = document.querySelector(".suggestions");
 const clearInputButton = document.querySelector("#clear-button");
 
-//* Cheap band-aid to avoid duplicate listeners when reloading after adding/deleting/editing articles. A better solution would be too much work and I'm lazy.
+//* Cheap band-aid to avoid duplicate listeners when reloading after adding/deleting/editing products. A better solution would be too much work and I'm lazy.
 let dejavuChecker = false;
 
 //* To confirm whether or not suggestion list has content
 let suggestionsBoolean = false;
 
-const addSuggestions = function (array, filterString) {
+const addSuggestions = function (array, filterString, dashboardBoolean = false) {
 	let newHtml = "";
 	suggestionList.innerHTML = "";
 	//* If the input is NOT empty
@@ -42,23 +42,27 @@ const addSuggestions = function (array, filterString) {
 				let suggestionString = suggestionValue.dataset.name;
 				input.value = suggestionString;
 				addSuggestions(array, suggestionString);
-				renderToHtml(array, suggestionString);
+				renderToHtml(array, suggestionString, dashboardBoolean);
 				suggestionList.classList.remove("shown");
 			});
+
 			//* Make suggestion list possible to navigate with keyboard
 			suggestionValue.addEventListener("keyup", function (e) {
 				arrowKeyNavigation(e, this, suggestionValueArray, input);
 			});
+
 			suggestionValue.addEventListener("blur", function () {
 				hideOnBlur(form, suggestionList);
 			});
 		}
+
 		//* If arrow key down is used from the search bar, drop down to suggestion list
 		input.addEventListener("keyup", function (e) {
 			if (suggestionsBoolean && e.keyCode === 40) {
 				suggestionValueArray[0].focus();
 			}
 		});
+		
 	} else {
 		suggestionsBoolean = false;
 	}
@@ -70,16 +74,18 @@ function rebuildToAvoidDuplicateListeners(element) {
 	element.parentNode.replaceChild(newEl, element);
 }
 
-function addSearchFunctionality(objectArray) {
+function addSearchFunctionality(objectArray, dashboardBoolean = false) {
 	if (dejavuChecker) {
 		rebuildToAvoidDuplicateListeners(clearInputButton);
 		rebuildToAvoidDuplicateListeners(input);
 	}
+
 	clearInputButton.addEventListener("click", function clearTheInput() {
 		input.value = "";
-		addSuggestions(objectArray, input.value);
+		addSuggestions(objectArray, input.value, dashboardBoolean);
 		renderToHtml(objectArray);
 	});
+
 	clearInputButton.addEventListener("keyup", function moveLeftOrEnter(e) {
 		//* Invoke click event when pressing enter
 		if (e.keyCode === 13) {
@@ -90,14 +96,13 @@ function addSearchFunctionality(objectArray) {
 			input.focus();
 		}
 	});
+
 	input.addEventListener("keyup", function moveRightToButton(e) {
 		if (e.keyCode === 39) {
 			clearInputButton.focus();
 		}
 	});
-	//! MDN recommends using the input-handler rather than keyup. The keyup-handler invokes on shift, enter, ctrl, backspace etc, and will not invoke when you paste a value with right-click.
-	//! Whereas 'input' only listens for anything of substance being changed in an input's value.
-	//! https://developer.mozilla.org/en-US/docs/Web/API/Document/keyup_event
+
 	input.addEventListener("input", function handleInput() {
 		//* Render matching cards to the DOM
 		try {
@@ -108,6 +113,7 @@ function addSearchFunctionality(objectArray) {
 		//* Add matching items to suggestions list
 		addSuggestions(objectArray, input.value);
 	});
+
 	input.addEventListener("focus", function handleFocus() {
 		addSuggestions(objectArray, input.value);
 		suggestionList.classList.add("shown");

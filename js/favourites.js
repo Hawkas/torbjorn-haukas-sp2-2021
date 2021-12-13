@@ -9,7 +9,7 @@ adjustMenu();
 
 const clearAllButton = document.querySelector(".btn__clear-storage");
 
-function renderArticles(objectArray) {
+function renderProducts(objectArray) {
 	//* Get favourites array from localstorage, and filter the array from the API with it
 	let favouritesArray = getFromStorage("favourites");
 	let filteredArray = filterFromFavourites(objectArray, favouritesArray);
@@ -23,7 +23,7 @@ function renderArticles(objectArray) {
 		for (let element of icons) {
 			//* When an element is 'unfavourited', rerun the render operation.
 			element.addEventListener("click", () => {
-				renderArticles(objectArray);
+				renderProducts(objectArray);
 			});
 		}
 	} catch (error) {
@@ -33,15 +33,15 @@ function renderArticles(objectArray) {
 }
 
 try {
-	const articlesArray = await fetchData(`${BASE_URL}/articles`);
+	const productsArray = await fetchData(`${BASE_URL}/products`);
 	clearAllButton.addEventListener("click", () => {
 		if (window.confirm("Do you really want to clear your favourites?")) {
 			removeKeyFromStorage("favourites");
 			clearAllButton.disabled = true;
-			renderArticles(articlesArray);
+			renderProducts(productsArray);
 		}
 	});
-	renderArticles(articlesArray);
+	renderProducts(productsArray);
 } catch (error) {
 	console.error(error);
 	apiError();
