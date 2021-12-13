@@ -1,0 +1,118 @@
+body > main,
+body > header {
+	max-width: 1140px;
+	margin: 0 auto;
+}
+#page_loader {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: white;
+	z-index: 100;
+}
+.signin {
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin: auto;
+}
+.signin__form {
+	display: flex;
+	flex-flow: column;
+	gap: 10px;
+}
+.navbar {
+	max-width: 100%;
+	padding-bottom: 20px;
+}
+.navbar .container-fluid {
+	max-width: 1140px;
+	margin: 0 auto;
+}
+
+.navbar-collapse form {
+	flex-basis: 100%;
+	gap: 10px;
+	position: relative;
+}
+.navbar-collapse form > * {
+	flex: 1 1 auto;
+	flex-basis: calc((830px - 100%) * 999);
+}
+
+.suggestions {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	margin: 0;
+	background-color: #464646;
+	color: white;
+	list-style: none;
+	padding: 0;
+	z-index: 999;
+}
+.suggestions.shown {
+	display: block;
+}
+.suggestions__value {
+	padding: 5px 15px;
+}
+.suggestions__value > span {
+	color: rgb(150, 255, 137);
+}
+
+.suggestions__value:hover,
+.suggestions__value:focus {
+	background-color: blue;
+	cursor: pointer;
+}
+.card-img-top {
+	padding-top: 20px;
+	min-height: 200px;
+	max-height: 200px;
+	width: auto;
+	margin: 0 auto;
+	object-fit: contain;
+	object-position: center;
+}
+.card__container {
+	display: flex;
+	flex-flow: wrap;
+	gap: 15px;
+}
+.card__item {
+	border: 1px solid gray;
+	min-width: 200px;
+	padding: 20px;
+}
+.card-body {
+	display: flex;
+	flex-flow: row wrap;
+}
+.card-body > * {
+	flex-basis: 100%;
+}
+
+.card__icon {
+	flex-basis: auto;
+	font-size: 1.25rem;
+	margin-left: auto;
+	margin-top: auto;
+}
+.card__icon:hover,
+.card__icon:focus {
+	color: red;
+}
+.card__buttons {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	align-content: baseline;
+}
+h2 {
+	font-size: 1.5rem;
+}
