@@ -1,0 +1,45 @@
+/* Fluid typography mixin */
+
+@mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
+	@each $property in $properties {
+		#{$property}: $min-value;
+	}
+
+	@media only screen and (min-width: $min-vw) {
+		@each $property in $properties {
+			#{$property}: calc(
+				#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}
+			);
+		}
+	}
+
+	@media only screen and (min-width: $max-vw) {
+		@each $property in $properties {
+			#{$property}: $max-value;
+		}
+	}
+}
+
+@function strip-unit($number) {
+	@if type-of($number) == "number" and not unitless($number) {
+		@return $number / ($number * 0 + 1);
+	}
+
+	@return $number;
+}
+
+@mixin primary-fonts($lineheight: 150%, $letterspacing: 0.006em, $fontsize: $bodytext-16px, $fontweight: $regular) {
+	font-family: $primary-font;
+	line-height: $lineheight;
+	letter-spacing: $letterspacing;
+	font-size: $fontsize;
+	font-weight: $fontweight;
+}
+
+@mixin display-fonts($lineheight: 100%, $fontsize: $sectiontitle-32px, $letterspacing: 0.05em, $fontweight: $bold) {
+	font-family: $display-font;
+	line-height: $lineheight;
+	letters-spacing: $letterspacing;
+	font-weight: $fontweight;
+	@include fluid-type(font-size, 320px, 768px, $fontsize * 0.75, $fontsize);
+}

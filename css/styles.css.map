@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "mappings": "ACAA,kBAAkB;AA8BlB,eAAe;AAOf,sBAAsB;AACtB,uCAAuC;AAYvC,kBAAkB;AAKlB,mBAAmB;ACvDnB,4BAA4B",
+    "sources": [
+        "../scss/styles.scss",
+        "../scss/partials/_variables.scss",
+        "../scss/partials/_mixins.scss",
+        "../scss/partials/_typography.scss",
+        "../scss/partials/_layout.scss",
+        "../scss/partials/_buttons.scss",
+        "../scss/partials/_nav.scss",
+        "../scss/partials/_footer.scss",
+        "../scss/partials/_cards.scss",
+        "../scss/partials/_home.scss",
+        "../scss/partials/_cart.scss",
+        "../scss/partials/_favourites.scss",
+        "../scss/partials/_shop.scss",
+        "../scss/partials/_product.scss"
+    ],
+    "names": [],
+    "file": "styles.css"
+}

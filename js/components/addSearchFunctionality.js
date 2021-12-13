@@ -10,7 +10,7 @@ const form = document.querySelector(".navbar__search");
 const suggestionList = document.querySelector(".suggestions");
 const clearInputButton = document.querySelector("#clear-button");
 
-//* Cheap band-aid to avoid duplicate listeners when reloading after adding/deleting/editing products. A better solution would be too much work and I'm lazy.
+//* Cheap band-aid to avoid duplicate listeners when reloading after adding/deleting/editing products
 let dejavuChecker = false;
 
 //* To confirm whether or not suggestion list has content
@@ -62,7 +62,7 @@ const addSuggestions = function (array, filterString, dashboardBoolean = false) 
 				suggestionValueArray[0].focus();
 			}
 		});
-		
+
 	} else {
 		suggestionsBoolean = false;
 	}

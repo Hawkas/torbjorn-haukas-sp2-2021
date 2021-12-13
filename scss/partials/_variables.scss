@@ -1,0 +1,59 @@
+/* Color styles */
+$white: rgba(255, 255, 255, 1);
+$black: rgba(13, 14, 18, 1);
+$gray: rgba(153, 176, 167, 1);
+$red: rgba(255, 111, 111, 1);
+
+$primary: rgba(79, 250, 202, 1);
+$primary-shade1: rgba(53, 227, 178, 1);
+$primary-shade2: rgba(38, 200, 154, 1);
+$primary-shade3: rgba(39, 163, 128, 1);
+$primary-shade4: rgba(39, 133, 106, 1);
+$primary-hover: rgba(136, 255, 222, 1);
+$on-primary: rgba(28, 33, 50, 1);
+$on-primary-012: rgba(255, 255, 255, 0.12);
+$on-surface-008: rgba(26, 28, 25, 0.08);
+
+$surface: rgba(24, 28, 40, 1);
+$on-surface: rgba(255, 255, 255, 1);
+$surface-variant: rgba(28, 31, 45, 1);
+$on-surface-variant: rgba(255, 255, 255, 1);
+$on-surface-gray: rgba(118, 122, 134, 1);
+$on-surface-07: rgba(255, 255, 255, 0.7);
+
+$border: rgba(222, 247, 252, 0.3199999928474426);
+$border-hover: rgba(222, 247, 252, 1);
+$card-inner-border: rgba(255, 250, 255, 0.1599999964237213);
+
+$hero-gradient: linear-gradient(180deg, rgba(28, 31, 45, 0) -11.39%, rgba(79, 250, 202, 0.1) 100%);
+$card-gradient: linear-gradient(180deg, rgba(91, 94, 115, 0.4) 0%, rgba(91, 94, 115, 0.05) 100%);
+
+/* Typefaces */
+$primary-font: "Red Hat Display", sans-serif;
+$display-font: "Syne", sans-serif;
+
+$font-family-base: $primary-font;
+$headings-font-family: $primary-font;
+
+/* Text-size styles */
+/* base size: --bodytext-16px (16px) */
+//* Keeping some variables with similar values to more easily make changes to specific elements at a later time if needed */
+$bigtitle: 3.5rem;
+$sectiontitle: 2rem;
+$elementtitle-28px: 1.75rem;
+$cardtitle: 1.375rem;
+$bodytext: 1rem;
+$buttontext: 0.94rem;
+$buttontextslim: 0.88rem;
+$navtext: 0.88rem;
+$smalltext-author: 0.69rem;
+
+/* Font Weights */
+$regular: 400;
+$medium: 500;
+$bold: 700;
+
+/* Effect styles */
+$button-hover: 0px 1px 3px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+$card-elevated: 0px 2px 6px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+$svgshadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
