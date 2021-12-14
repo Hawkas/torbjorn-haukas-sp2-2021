@@ -7,12 +7,14 @@
 		<title>Home - Ethereal</title>
 		<meta
 			name="description"
-			content="Ethereal is a marketplace for NFTs from a curated list of artists, totally not just stock photos"
+			content="Art on the ether just became real, and Ethereal is a marketplace for NFTs from a curated list of artists, totally not just stock photos"
 		/>
 		<!-- This snippet is taken from https://csswizardry.com/2020/05/the-fastest-google-fonts/ -->
 		<!-- [1] -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://kit.fontawesome.com" crossorigin />
+		<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 		<!-- [2] -->
 		<link
 			rel="preload"
@@ -30,19 +32,114 @@
 		<noscript
 			><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@401&family=Syne&display=swap"
 		/></noscript>
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-			crossorigin="anonymous"
-		/>
 		<link rel="stylesheet" href="./css/styles.css" />
 	</head>
 	<body>
+		<header class="navigation">
+			<div class="navigation__divider"></div>
+			<nav class="navigation__navbar navbar navbar-expand-md navbar-dark">
+				<div class="navigation__container container-fluid px-0">
+					<div class="navigation__left">
+						<button
+							class="navbar-toggler hamburger hamburger--squeeze"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent"
+							aria-expanded="false"
+							aria-label="Toggle navigation"
+						>
+							<span class="hamburger-box">
+								<span class="hamburger-inner"></span>
+							</span>
+						</button>
+						<a href="#" class="navigation__logo-linkwrap navbar-brand py-0">
+							<img src="./media/Logo.svg" alt="Ethereal Logo" class="navigation__logo" width="158" height="54" />
+						</a>
+					</div>
+					<div class="navigation__middle collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-lg-0 navigation__navlist">
+							<li class="nav-item navigation__item">
+								<a aria-current="page" href="#" class="p-0 active nav-link navigation__link"><span>Home</span></a>
+							</li>
+							<li class="nav-item navigation__item">
+								<a href="./marketplace.html" class="p-0 nav-link navigation__link"><span>Marketplace</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="navigation__right">
+						<div class="navigation__iconbuttons">
+							<div class="navigation__iconbtn-wrap">
+								<button
+									title="Sign in"
+									class="fa-layers fa-fw navigation__iconbtn navigation__iconbtn--signin"
+									data-bs-tooltip="tooltip"
+									data-bs-placement="bottom"
+									data-bs-toggle="modal"
+									data-bs-target="#staticBackdrop"
+									data-modal="user"
+								>
+									<i class="fa-regular fa-user"></i>
+									<span class="fa-regular fa-sign-in" data-fa-transform="shrink-6 right-12"></span>
+								</button>
+							</div>
+							<div class="navigation__iconbtn-wrap">
+								<a
+									data-bs-tooltip="tooltip"
+									data-bs-placement="bottom"
+									title="View your favourites"
+									href="./favourites.html"
+									class="navigation__iconbtn"
+								>
+									<i class="fa-regular fa-heart"></i>
+								</a>
+							</div>
+							<div class="navigation__iconbtn-wrap">
+								<button
+									title="View your cart"
+									class="fa-layers fa-fw navigation__iconbtn navigation__iconbtn--cart"
+									data-bs-tooltip="tooltip"
+									data-bs-placement="bottom"
+									data-bs-toggle="modal"
+									data-bs-target="#staticBackdrop"
+									data-modal="cart"
+								>
+									<i class="fa-regular fa-shopping-cart"></i>
+									<span class="navigation__counter fa-layers-counter">0</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<main class="main main--home">
+			<header class="hero">
+				<div class="custom-shape-divider-bottom-1639521041">
+					<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+						<path
+							d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z"
+							class="shape-fill"
+						></path>
+					</svg>
+				</div>
+				<div class="hero__content">
+					<div class="hero__textblock">
+						<h1 class="hero__title">NFT<span class="hero__title--slim">The&nbsp;Future&nbsp;of Art&nbsp;Collection</span></h1>
+						<p class="hero__bodytext">
+							Start building your collection of exclusive digital items today. We're not a scam, we promise.
+						</p>
+						<a href="./marketplace.html" class="hero__button btn btn-primary">Get started</a>
+					</div>
+					<div class="heroimg"><img src="./media/monalisa-singlepaths.svg" alt="Vector art of Mona Lisa" /></div>
+				</div>
+			</header>
+		</main>
 		<!-- Import Axios -->
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<!-- Import FontAwesome -->
-		<script src="https://kit.fontawesome.com/ea2405e1e7.js" crossorigin="anonymous"></script>
+		<script src="https://kit.fontawesome.com/c235a816ca.js" crossorigin="anonymous"></script>
+		<script src="./bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
 		<script type="module" src="./js/index.js"></script>
 	</body>
 </html>

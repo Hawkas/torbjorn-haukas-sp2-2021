@@ -28,7 +28,7 @@
 	@return $number;
 }
 
-@mixin primary-fonts($lineheight: 150%, $letterspacing: 0.006em, $fontsize: $bodytext-16px, $fontweight: $regular) {
+@mixin primary-fonts($lineheight: 150%, $letterspacing: 0.006em, $fontsize: $bodytext, $fontweight: $regular) {
 	font-family: $primary-font;
 	line-height: $lineheight;
 	letter-spacing: $letterspacing;
@@ -36,10 +36,31 @@
 	font-weight: $fontweight;
 }
 
-@mixin display-fonts($lineheight: 100%, $fontsize: $sectiontitle-32px, $letterspacing: 0.05em, $fontweight: $bold) {
+@mixin display-fonts($lineheight: 100%, $fontsize: $sectiontitle, $letterspacing: 0.05em, $fontweight: $bold) {
 	font-family: $display-font;
 	line-height: $lineheight;
 	letters-spacing: $letterspacing;
 	font-weight: $fontweight;
 	@include fluid-type(font-size, 320px, 768px, $fontsize * 0.75, $fontsize);
+}
+
+/* Generate media queries for layout width placeholder */
+@mixin body-layout($minwidth, $margin-value, $body-value) {
+	@media only screen and (min-width: $minwidth) {
+		width: $body-value;
+		margin-left: $margin-value;
+		margin-right: $margin-value;
+	}
+}
+
+// because adding visibility to pseudo selectors is too much text
+
+@mixin pseudoborders() {
+	content: "";
+	display: block;
+	height: 1px;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
 }

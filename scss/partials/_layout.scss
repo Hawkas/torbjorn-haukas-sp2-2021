@@ -1,0 +1,26 @@
+html {
+	font-size: 16px;
+}
+
+body {
+	background-color: $surface;
+	color: $on-surface;
+	font-family: $primary-font;
+}
+%layoutwidth {
+	width: auto;
+	margin-left: 10px;
+	margin-right: 10px;
+	@include body-layout(600px, 32px, auto);
+	@include body-layout(905px, auto, 840px);
+	@include body-layout(1240px, 200px, auto);
+	@include body-layout(1440px, auto, 1040px);
+}
+/* Using Mixins rather than extend to avoid cascade headaches */
+/* Fully aware that this will increase the filesize of my CSS, but whatevs */
+.navigation {
+	width: 100%;
+	&__navbar {
+		@extend %layoutwidth;
+	}
+}

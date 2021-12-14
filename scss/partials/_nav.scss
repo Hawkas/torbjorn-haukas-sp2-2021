@@ -1,0 +1,168 @@
+.navigation {
+	position: relative;
+	background-color: $surface-variant;
+	color: $on-surface-07;
+	box-shadow: $card-elevated;
+	&__navbar {
+		padding: 9px 0;
+	}
+	&__logo-linkwrap {
+		@include fluid-type(margin-right, 360px, 768px, 1px, 72px);
+	}
+
+	&__right,
+	&__left,
+	&__item,
+	&__iconbtn-wrap {
+		display: flex;
+		align-items: flex-end;
+	}
+	&__right,
+	&__navlist {
+		min-height: 54px;
+	}
+	&__navlist {
+		@include fluid-type(gap, 360px, 768px, 20px, 40px);
+	}
+	&__iconbuttons {
+		padding-bottom: 7px;
+		@include fluid-type(gap, 360px, 768px, 30px, 40px);
+		@include fluid-type(font-size, 360px, 768px, 24px, 27px);
+		display: flex;
+		justify-content: flex-end;
+		align-items: flex-end;
+	}
+	&__iconbtn {
+		color: $on-surface-07;
+		line-height: 100%;
+	}
+
+	&__counter {
+		--fa-counter-background-color: #{$primary-shade4};
+		--fa-inverse: #{$white};
+		--fa-counter-scale: 1;
+		--fa-right: -5px;
+		--fa-top: -7px;
+		@include primary-fonts(100%, 0, 10px, $bold);
+	}
+	&__iconbtn--cart {
+		margin-right: 5px;
+	}
+	&__iconbtn--signin {
+		margin-right: 12px;
+		.fa-sign-in {
+			color: rgba($color: $on-surface-07, $alpha: 1);
+		}
+		&:hover .fa-sign-in,
+		&:focus .fa-sign-in {
+			color: rgba($color: $primary-hover, $alpha: 0.7);
+		}
+	}
+	@media only screen and (max-width: 767.8px) {
+		&__navbar {
+			padding: 0px;
+		}
+		&__right,
+		&__left {
+			padding: 9px 0px;
+		}
+		&__iconbuttons {
+			padding-bottom: 0;
+		}
+		&__left {
+			order: 1;
+		}
+		&__right {
+			order: 2;
+		}
+		&__middle {
+			order: 3;
+		}
+		&__navlist {
+			position: relative;
+			padding: {
+				top: 40px;
+				bottom: 60px;
+			}
+		}
+		&__divider {
+			@include pseudoborders;
+			top: 73px;
+			background-color: rgba($color: $on-surface, $alpha: 0.3);
+			visibility: hidden;
+		}
+		&.is-active {
+			border-bottom: 2px solid rgba($color: $on-surface, $alpha: 0.3);
+		}
+		&__divider.is-active {
+			visibility: visible;
+		}
+
+		&__item {
+			position: relative;
+		}
+		&__link {
+			width: 100%;
+		}
+		&__item:last-child::before {
+			@include pseudoborders;
+			background-color: $on-primary-012;
+			@include fluid-type(top, 360px, 768px, -10px, -20px);
+		}
+		&__item:last-child::after {
+			@include pseudoborders;
+			background-color: $on-primary-012;
+			@include fluid-type(bottom, 360px, 768px, -7px, -14px);
+		}
+		@media only screen and (max-width: 400px) {
+			&__left {
+				flex-basis: 100%;
+				justify-content: center;
+			}
+			&__logo-linkwrap {
+				margin: {
+					left: auto;
+					right: auto;
+				}
+			}
+			&::after {
+				@include pseudoborders;
+				top: 73px;
+				background-color: rgba($color: $on-surface, $alpha: 0.1);
+			}
+			&__divider {
+				top: 126px;
+			}
+			&__right {
+				flex-basis: 100%;
+			}
+			&__iconbuttons {
+				width: 100%;
+				gap: 0;
+				justify-content: space-between;
+			}
+			&__iconbtn-wrap {
+				flex: 1 1 45%;
+				display: flex;
+				justify-content: center;
+				$panelborder: 1px solid
+					rgba(
+						$color: $on-surface,
+						$alpha: 0.1,
+					);
+				border-left: $panelborder;
+				border-right: $panelborder;
+			}
+			&__iconbtn-wrap:first-child {
+				flex-basis: 27.5%;
+				justify-content: flex-start;
+				border: none;
+			}
+			&__iconbtn-wrap:last-child {
+				flex-basis: 27.5%;
+				justify-content: flex-end;
+				border: none;
+			}
+		}
+	}
+}
