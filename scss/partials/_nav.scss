@@ -1,4 +1,5 @@
 .navigation {
+	z-index: 5;
 	position: relative;
 	background-color: $surface-variant;
 	color: $on-surface-07;
@@ -114,7 +115,7 @@
 			background-color: $on-primary-012;
 			@include fluid-type(bottom, 360px, 768px, -7px, -14px);
 		}
-		@media only screen and (max-width: 400px) {
+		@media only screen and (max-width: 420px) {
 			&__left {
 				flex-basis: 100%;
 				justify-content: center;

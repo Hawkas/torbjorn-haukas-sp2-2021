@@ -1,4 +1,5 @@
-/* Fluid typography mixin */
+//* Fluid type mixin
+//? Couldn't find source but I found it many months ago on some css-tricks post
 
 @mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
 	@each $property in $properties {
@@ -28,6 +29,9 @@
 	@return $number;
 }
 
+//* button animation mixin https://codepen.io/anon/embed/qmerBv?height=500&theme-id=1&slug-hash=qmerBv&default-tab=result#css-box
+
+//* Shitty mixins I made myself
 @mixin primary-fonts($lineheight: 150%, $letterspacing: 0.006em, $fontsize: $bodytext, $fontweight: $regular) {
 	font-family: $primary-font;
 	line-height: $lineheight;
@@ -39,12 +43,12 @@
 @mixin display-fonts($lineheight: 100%, $fontsize: $sectiontitle, $letterspacing: 0.05em, $fontweight: $bold) {
 	font-family: $display-font;
 	line-height: $lineheight;
-	letters-spacing: $letterspacing;
+	letter-spacing: $letterspacing;
 	font-weight: $fontweight;
 	@include fluid-type(font-size, 320px, 768px, $fontsize * 0.75, $fontsize);
 }
 
-/* Generate media queries for layout width placeholder */
+// Generate media queries for layout width placeholder
 @mixin body-layout($minwidth, $margin-value, $body-value) {
 	@media only screen and (min-width: $minwidth) {
 		width: $body-value;
@@ -63,4 +67,18 @@
 	position: absolute;
 	left: 0;
 	right: 0;
+}
+
+// move out of bounds by svg width, add offset value to adjust how far inside the margin it should be
+// top value is based on percentage of the width of the svg
+// lock both values when max container width is reached.
+@mixin svg-pos($x-pos, $offset: 12.3%, $media: true) {
+	top: unquote("calc((var(--svgsize) * 0.336283185841) * -1)");
+	#{$x-pos}: unquote("calc((var(--svgsize) * -1) + #{$offset})");
+	@if $media == true {
+		@media only screen and (min-width: 1440px) {
+			top: -152px;
+			#{x-pos}: -324px;
+		}
+	}
 }

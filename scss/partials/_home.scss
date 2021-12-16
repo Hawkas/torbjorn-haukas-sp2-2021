@@ -9,13 +9,94 @@
 		position: relative;
 		display: block;
 		width: calc(100% + 1.3px);
-		height: 120px;
-	}
-	.shape-fill {
-		fill: #1c1f2d;
+		@include fluid-type(height, 320px, 500px, 50px, 120px);
+		filter: drop-shadow(0 4px 4px rgba($black, 0.25)) url(#inset-shadow);
+		.shape-fill {
+			fill: $surface-variant;
+		}
 	}
 }
 
 .hero {
 	position: relative;
+	background: $hero-gradient;
+	&__content {
+		position: relative;
+		overflow: visible;
+		display: flex;
+		justify-content: space-between;
+		@include fluid-type(padding-top, 360px, 768px, 100px, 170px);
+		@include fluid-type(padding-bottom, 360px, 768px, 150px, 200px);
+	}
+	&__bgsvg {
+		position: absolute;
+		height: auto;
+		@include fluid-type(width, 360px, 1440px, 283px, 452px);
+		--svgsize: calc(283px + 169 * (100vw - 360px) / 1080);
+		// move out of bounds by svg width, add offset value
+
+		&--left {
+			@include svg-pos(left);
+		}
+		&--right {
+			@include svg-pos(right);
+			@media only screen and (max-width: 767.8px) {
+				@include svg-pos(right, 43.61%, false);
+			}
+		}
+		@media only screen and (min-width: 1440px) {
+			&--right {
+				top: -152px;
+				right: -324px;
+			}
+			&--left {
+				top: -152px;
+				left: -324px;
+			}
+		}
+	}
+
+	&__textblock {
+		display: flex;
+		flex-flow: column;
+		align-items: flex-start;
+		gap: 10px;
+		max-width: 355px;
+	}
+	&__title {
+		text-transform: uppercase;
+		@include display-fonts(100%, $bigtitle, 1.4px, 800);
+		span {
+			display: block;
+		}
+		&--slim {
+			margin: {
+				top: 10px;
+				bottom: 6px;
+			}
+			@include display-fonts(125%, $sectiontitle, 1.4px, 700);
+		}
+	}
+
+	&__img {
+		display: none;
+		height: 100%;
+		align-self: center;
+		@media only screen and (min-width: 768px) {
+			display: block;
+		}
+		img {
+			height: auto;
+			@include fluid-type(width, 768px, 1440px, 315px, 575px);
+		}
+	}
+	&__bodytext {
+		@include primary-fonts(24px, 1px);
+		margin-bottom: 26px;
+	}
+}
+.info {
+	width: 100%;
+	height: 900px;
+	background-color: #1c1c2d;
 }

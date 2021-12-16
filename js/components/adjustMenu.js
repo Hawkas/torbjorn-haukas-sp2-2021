@@ -34,6 +34,11 @@ const adjustMenu = function () {
 	let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 		return new bootstrap.Tooltip(tooltipTriggerEl);
 	});
+	// Just so I can account for the scrollbar's width when using VW units
+	document.documentElement.style.setProperty(
+		"--scrollbar-width",
+		window.innerWidth - document.documentElement.clientWidth + "px"
+	);
 };
 
 export default adjustMenu;

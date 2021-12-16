@@ -19,18 +19,20 @@
 		<link
 			rel="preload"
 			as="style"
-			href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@401&family=Syne&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&family=Syne:wght@700;800&display=swap"
 		/>
 		<!-- [3] -->
 		<link
 			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@401&family=Syne&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&family=Syne:wght@700;800&display=swap"
 			media="all"
 			onload="this.media='all'"
 		/>
 		<!-- [4] -->
 		<noscript
-			><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@401&family=Syne&display=swap"
+			><link
+				rel="stylesheet"
+				href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&family=Syne:wght@700;800&display=swap"
 		/></noscript>
 		<link rel="stylesheet" href="./css/styles.css" />
 	</head>
@@ -117,6 +119,26 @@
 			<header class="hero">
 				<div class="custom-shape-divider-bottom-1639521041">
 					<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+						<filter id="inset-shadow">
+							<!-- Shadow Offset -->
+							<feOffset dx="0" dy="4" />
+
+							<!-- Shadow Blur -->
+							<feGaussianBlur stdDeviation="4" result="offset-blur" />
+
+							<!-- Invert the drop shadow
+								 to create an inner shadow -->
+							<feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse" />
+
+							<!-- Color & Opacity -->
+							<feFlood flood-color="rgb(13, 14, 18)" flood-opacity="0.25" result="color" />
+
+							<!-- Clip color inside shadow -->
+							<feComposite operator="in" in="color" in2="inverse" result="shadow" />
+
+							<!-- Put shadow over original object -->
+							<feComposite operator="over" in="shadow" in2="SourceGraphic" />
+						</filter>
 						<path
 							d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z"
 							class="shape-fill"
@@ -124,16 +146,28 @@
 					</svg>
 				</div>
 				<div class="hero__content">
+					<img src="./media/herologo-left.svg" alt="" class="hero__bgsvg hero__bgsvg--left" width="452" height="452" />
+					<img src="./media/herologo-right.svg" alt="" class="hero__bgsvg hero__bgsvg--right" />
 					<div class="hero__textblock">
-						<h1 class="hero__title">NFT<span class="hero__title--slim">The&nbsp;Future&nbsp;of Art&nbsp;Collection</span></h1>
-						<p class="hero__bodytext">
+						<h1 class="hero__title">
+							<span class="animate__animated animate__fadeInLeft animate__faster">NFT</span>
+							<span class="hero__title--slim animate__animated animate__fadeInLeft animate__fast">
+								The&nbsp;Future&nbsp;of Art&nbsp;Collection
+							</span>
+						</h1>
+						<p class="hero__bodytext animate__animated animate__fadeInLeft animate__faster animate__delay-1s">
 							Start building your collection of exclusive digital items today. We're not a scam, we promise.
 						</p>
-						<a href="./marketplace.html" class="hero__button btn btn-primary">Get started</a>
+						<div class="hero__button animate__animated animate__fadeIn animate__faster animate__delay-2s">
+							<a href="./marketplace.html" class="button__primary">Get started</a>
+						</div>
 					</div>
-					<div class="heroimg"><img src="./media/monalisa-singlepaths.svg" alt="Vector art of Mona Lisa" /></div>
+					<div class="hero__img">
+						<img src="./media/monalisa-singlepaths.svg" alt="Vector art of Mona Lisa" width="315" height="187" />
+					</div>
 				</div>
 			</header>
+			<section class="info"></section>
 		</main>
 		<!-- Import Axios -->
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
