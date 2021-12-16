@@ -12281,14 +12281,16 @@ body {
   font-family: "Red Hat Display", sans-serif;
 }
 
-.navigation__navbar, .hero__content {
+.navigation__navbar, .hero__content,
+.info__content {
   width: auto;
   margin-left: 10px;
   margin-right: 10px;
 }
 
 @media only screen and (min-width: 600px) {
-  .navigation__navbar, .hero__content {
+  .navigation__navbar, .hero__content,
+  .info__content {
     width: auto;
     margin-left: 32px;
     margin-right: 32px;
@@ -12296,7 +12298,8 @@ body {
 }
 
 @media only screen and (min-width: 905px) {
-  .navigation__navbar, .hero__content {
+  .navigation__navbar, .hero__content,
+  .info__content {
     width: 840px;
     margin-left: auto;
     margin-right: auto;
@@ -12304,7 +12307,8 @@ body {
 }
 
 @media only screen and (min-width: 1040px) {
-  .navigation__navbar, .hero__content {
+  .navigation__navbar, .hero__content,
+  .info__content {
     width: auto;
     margin-left: 100px;
     margin-right: 100px;
@@ -12312,7 +12316,8 @@ body {
 }
 
 @media only screen and (min-width: 1240px) {
-  .navigation__navbar, .hero__content {
+  .navigation__navbar, .hero__content,
+  .info__content {
     width: auto;
     margin-left: 156px;
     margin-right: 156px;
@@ -12320,7 +12325,8 @@ body {
 }
 
 @media only screen and (min-width: 1440px) {
-  .navigation__navbar, .hero__content {
+  .navigation__navbar, .hero__content,
+  .info__content {
     width: 1040px;
     margin-left: auto;
     margin-right: auto;
@@ -12331,7 +12337,8 @@ body {
   width: 100%;
 }
 
-.hero {
+.hero,
+.info {
   width: 100%;
 }
 
@@ -13092,7 +13099,7 @@ button,
   }
 }
 
-.hero__bodytext {
+.hero__bodytext, .info__text {
   font-family: "Red Hat Display", sans-serif;
   line-height: 24px;
   letter-spacing: 1px;
@@ -13103,7 +13110,184 @@ button,
 
 .info {
   width: 100%;
-  height: 900px;
   background-color: #1c1c2d;
+  background-image: url("./../../media/info-bgsvg.svg");
+  background-repeat: no-repeat;
+  background-size: clamp(360px, 78.33%, 1128px);
+  background-position: center 15px;
+}
+
+.info__content {
+  padding-top: 100px;
+  padding-bottom: 200px;
+}
+
+.info__title {
+  text-align: center;
+  font-family: "Syne", sans-serif;
+  line-height: 100%;
+  letter-spacing: 1.4px;
+  font-weight: 800;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+}
+
+@media only screen and (min-width: 320px) {
+  .info__title {
+    font-size: calc( 1.5rem + 0.5 * (100vw - 320px) / 448);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .info__title {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .info__title {
+    margin-bottom: calc( 50px + 50 * (100vw - 360px) / 408);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .info__title {
+    margin-bottom: 100px;
+  }
+}
+
+.info__wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: (auto)[3];
+      grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+  grid-row-gap: 40px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+}
+
+.info__arrow {
+  display: none;
+}
+
+@media only screen and (min-width: 784px) {
+  .info__arrow {
+    display: block;
+    width: 50%;
+    -ms-flex-item-align: end;
+        -ms-grid-row-align: end;
+        align-self: end;
+    margin-bottom: 20px;
+  }
+  .info__arrow--1 {
+    grid-area: arr1;
+  }
+  .info__arrow--2 {
+    grid-area: arr2;
+    -webkit-transform: scale(-1, 1);
+            transform: scale(-1, 1);
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    -ms-grid-column-align: end;
+        justify-self: end;
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 784px) and (min-width: 1400px) {
+  .info__arrow--2 {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -ms-grid-column-align: start;
+        justify-self: start;
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (min-width: 784px) {
+  .info__card--what {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 1;
+    grid-area: what;
+  }
+  .info__card--exam {
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 2;
+    -ms-grid-column: 2;
+    grid-area: exam;
+  }
+  .info__card--why {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    grid-area: why;
+  }
+  .info__wrapper {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: 276px max-content 0.8fr 20px auto;
+        grid-template-rows: 276px -webkit-max-content 0.8fr 20px auto;
+        grid-template-rows: 276px max-content 0.8fr 20px auto;
+    grid-gap: 0px 20px;
+        grid-template-areas: "what arr1" "what exam" "arr2 exam" ".    .   " "why  .   ";
+  }
+}
+
+@media only screen and (min-width: 784px) and (min-width: 1400px) {
+  .info__wrapper {
+        grid-template-areas: "what arr1 .   " "what exam arr2" "what exam why " ".    exam why ";
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+    -ms-grid-rows: 276px 215px 0.3fr 1fr;
+        grid-template-rows: 276px 215px 0.3fr 1fr;
+  }
+}
+
+.info__card {
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background-color: #181c28;
+  padding: 10px;
+}
+
+@media only screen and (min-width: 360px) {
+  .info__card {
+    padding: calc( 10px + 15 * (100vw - 360px) / 408);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .info__card {
+    padding: 25px;
+  }
+}
+
+.info__cardtitle {
+  margin-bottom: 32px;
+  font-family: "Syne", sans-serif;
+  line-height: 100%;
+  letter-spacing: 0;
+  font-weight: 700;
+  font-size: 1.3125rem;
+}
+
+@media only screen and (min-width: 320px) {
+  .info__cardtitle {
+    font-size: calc( 1.3125rem + 0.4375 * (100vw - 320px) / 448);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .info__cardtitle {
+    font-size: 1.75rem;
+  }
+}
+
+.info__text:last-child {
+  margin-bottom: 0;
 }
 /*# sourceMappingURL=styles.css.map */

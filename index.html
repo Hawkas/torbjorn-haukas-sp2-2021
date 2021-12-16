@@ -146,8 +146,15 @@
 					</svg>
 				</div>
 				<div class="hero__content">
-					<img src="./media/herologo-left.svg" alt="" class="hero__bgsvg hero__bgsvg--left" width="452" height="452" />
-					<img src="./media/herologo-right.svg" alt="" class="hero__bgsvg hero__bgsvg--right" />
+					<img
+						aria-hidden="true"
+						src="./media/herologo-left.svg"
+						alt=""
+						class="hero__bgsvg hero__bgsvg--left"
+						width="452"
+						height="452"
+					/>
+					<img aria-hidden="true" src="./media/herologo-right.svg" alt="" class="hero__bgsvg hero__bgsvg--right" />
 					<div class="hero__textblock">
 						<h1 class="hero__title">
 							<span class="animate__animated animate__fadeInLeft animate__faster">NFT</span>
@@ -167,7 +174,74 @@
 					</div>
 				</div>
 			</header>
-			<section class="info"></section>
+			<div class="info">
+				<article class="info__content">
+					<h2 class="info__title">How it works</h2>
+					<div class="info__wrapper">
+						<article class="info__card info__card--what">
+							<h3 class="info__cardtitle">What are NFTs?</h3>
+							<div class="info__body">
+								<p class="info__text">NFTs are non-fungible tokens.</p>
+								<p class="info__text">Non-fungible means that it's unique and can't be replaced with something else.</p>
+								<p class="info__text">
+									More technically, NFT is a unit of data on a digital ledger called a blockchain, where each NFT represents a
+									unique digital item.
+								</p>
+								<p class="info__text">
+									Essentially, NFTs allow people to “own” images, gifs, audio, videos, items in video games, and other forms of
+									creative work. They can really be anything digital, but all of the current excitement is around using the tech
+									to sell digital art.
+								</p>
+							</div>
+						</article>
+						<svg class="info__arrow info__arrow--1" width="192" height="62" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<defs>
+								<symbol id="fork-arrow" viewbox="0 0 192 62">
+									<path
+										fill-rule="evenodd"
+										clip-rule="evenodd"
+										d="M180.672.00001614 0 0v3l178.5.00002V56.879l-6.985-6.9853c-.586-.5858-1.536-.5858-2.122 0-.585.5858-.585 1.5355 0 2.1213l9.546 9.5459c.586.5858 1.536.5858 2.122 0l9.546-9.5459c.585-.5858.585-1.5355 0-2.1213-.586-.5858-1.536-.5858-2.122 0L181.5 56.879V.0000161l-.5 7e-8-.328-3e-8Z"
+										fill="#fff"
+									/>
+								</symbol>
+							</defs>
+							<use href="#fork-arrow" />
+						</svg>
+						<article class="info__card info__card--exam">
+							<h3 class="info__cardtitle">Examples&nbsp;of&nbsp;NFTs</h3>
+							<div class="info__body">
+								<p class="info__text">
+									The first-ever tweet by Jack Dorsey was sold as an NFT for the equivalent of $2.9 million.
+								</p>
+								<p class="info__text">The original Nyan Cat was sold for the equivalent of $600,000.</p>
+								<p class="info__text">
+									And the single most expensive NFT ever sold — Everydays: The First 5000 Days. A collage of every single artwork
+									made by the digital artist Beeple. It was sold as an NFT for $69.3 million.
+								</p>
+							</div>
+						</article>
+						<svg class="info__arrow info__arrow--2" width="192" height="62" version="2.0">
+							<use href="#fork-arrow" />
+						</svg>
+						<article class="info__card info__card--why">
+							<h3 class="info__cardtitle">Everyone can download these artworks for free, so why?</h3>
+							<div class="info__body">
+								<p class="info__text">
+									That's right, you can. But NFTs are designed to give you something that can't be copied: ownership of the work.
+								</p>
+								<p class="info__text">
+									To put it in terms of physical art collecting: anyone can buy Nyan Cat. But only one person can own the
+									original.
+								</p>
+								<p class="info__text">
+									Owning something exclusive is often a reward in and of itself, and it could even be resold later for an even
+									higher value. This is what makes NFTs so attractive.
+								</p>
+							</div>
+						</article>
+					</div>
+				</article>
+			</div>
 		</main>
 		<!-- Import Axios -->
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
