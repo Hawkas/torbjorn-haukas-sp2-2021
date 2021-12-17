@@ -21,24 +21,49 @@
 // };
 // export default adjustMenu;
 
+//? Add or remove border styling on menu
+function toggleBorders(elArray, add = false) {
+	if (add) {
+		for (let element of elArray) {
+			element.classList.add("is-active");
+		}
+	} else {
+		for (let element of elArray) {
+			element.classList.remove("is-active");
+		}
+	}
+}
 const adjustMenu = function () {
 	const hamburger = document.querySelector(".hamburger");
-	const menuDivider = document.querySelector(".navigation__divider");
 	const fullNav = document.querySelector(".navigation");
+	const offcanvas = document.querySelector("#offcanvas");
+	//? Collapse is using bootstrap timings, I've adapted my code to follow its whims
 	hamburger.addEventListener("click", function () {
-		this.classList.toggle("is-active");
-		menuDivider.classList.toggle("is-active");
-		fullNav.classList.toggle("is-active");
+		let collapseCheck = this.classList.contains("collapsed");
+
+		//! If event fires and class is NOT present, menu is expanding.
+		if (!collapseCheck) {
+			// add my styling classes
+			toggleBorders([fullNav], "add");
+		}
+		//! If event fires and the class is present, menu is collapsing.
+		else {
+			// remove my styling classes
+			toggleBorders([fullNav]);
+		}
 	});
-	let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-tooltip="tooltip"]'));
+
+	//? Activate bootstraps Popper tooltips on elements with data-bs-tooltip="tooltip"
+	let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 	let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-		return new bootstrap.Tooltip(tooltipTriggerEl);
+		let tooltip = new bootstrap.Tooltip(tooltipTriggerEl);
+		tooltipTriggerEl.addEventListener("focusin", () => tooltip.show());
+		tooltipTriggerEl.addEventListener("focusout", () => tooltip.hide());
+		tooltipTriggerEl.firstChild.addEventListener("hidden.bs.offcanvas", () => tooltip.disable());
+
+		return tooltip;
 	});
-	// Just so I can account for the scrollbar's width when using VW units
-	document.documentElement.style.setProperty(
-		"--scrollbar-width",
-		window.innerWidth - document.documentElement.clientWidth + "px"
-	);
+	console.log(tooltipList);
 };
 
 export default adjustMenu;

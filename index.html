@@ -4,7 +4,11 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Home - Ethereal</title>
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<title>Ethereal - The Future of Art Collection</title>
 		<meta
 			name="description"
 			content="Art on the ether just became real, and Ethereal is a marketplace for NFTs from a curated list of artists, totally not just stock photos"
@@ -37,77 +41,80 @@
 		<link rel="stylesheet" href="./css/styles.css" />
 	</head>
 	<body>
-		<header class="navigation">
-			<div class="navigation__divider"></div>
+		<header class="navigation sticky-top">
 			<nav class="navigation__navbar navbar navbar-expand-md navbar-dark">
 				<div class="navigation__container container-fluid px-0">
 					<div class="navigation__left">
 						<button
-							class="navbar-toggler hamburger hamburger--squeeze"
+							class="navbar-toggler hamburger collapsed"
 							type="button"
 							data-bs-toggle="collapse"
-							data-bs-target="#navbarSupportedContent"
-							aria-controls="navbarSupportedContent"
+							data-bs-target="#navbarList"
+							aria-controls="navbarList"
 							aria-expanded="false"
 							aria-label="Toggle navigation"
 						>
-							<span class="hamburger-box">
-								<span class="hamburger-inner"></span>
+							<span class="hamburger__box">
+								<span class="hamburger__inner"></span>
 							</span>
 						</button>
 						<a href="#" class="navigation__logo-linkwrap navbar-brand py-0">
 							<img src="./media/Logo.svg" alt="Ethereal Logo" class="navigation__logo" width="158" height="54" />
 						</a>
 					</div>
-					<div class="navigation__middle collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-lg-0 navigation__navlist">
-							<li class="nav-item navigation__item">
-								<a aria-current="page" href="#" class="p-0 active nav-link navigation__link"><span>Home</span></a>
-							</li>
-							<li class="nav-item navigation__item">
-								<a href="./marketplace.html" class="p-0 nav-link navigation__link"><span>Marketplace</span></a>
-							</li>
-						</ul>
+					<div class="navigation__middle">
+						<div class="navigation__width-expander collapse navbar-collapse" id="navbarList">
+							<ul class="navbar-nav me-auto mb-lg-0 navigation__navlist">
+								<li class="nav-item navigation__item active">
+									<a aria-current="page" href="" class="active nav-link navigation__link">
+										<span>Home</span><i class="fal fa-home fa-fw"></i>
+									</a>
+								</li>
+								<li class="nav-item navigation__item">
+									<a href="./marketplace.html" class="nav-link navigation__link">
+										<span>Marketplace</span><i class="fal fa-gem fa-fw"></i>
+									</a>
+								</li>
+								<li class="nav-item navigation__item">
+									<a href="./favourites.html" class="nav-link navigation__link">
+										<span>Favourites</span><i class="fal fa-heart fa-fw"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 					<div class="navigation__right">
 						<div class="navigation__iconbuttons">
-							<div class="navigation__iconbtn-wrap">
+							<div
+								class="navigation__iconbtn-wrap"
+								title="Sign in"
+								data-bs-toggle="tooltip"
+								data-bs-trigger="hover"
+								data-bs-placement="bottom"
+							>
 								<button
-									title="Sign in"
-									class="fa-layers fa-fw navigation__iconbtn navigation__iconbtn--signin"
-									data-bs-tooltip="tooltip"
-									data-bs-placement="bottom"
-									data-bs-toggle="modal"
-									data-bs-target="#staticBackdrop"
+									class="navigation__iconbtn navigation__iconbtn--signin"
+									data-bs-toggle="offcanvas"
+									data-bs-target="#offcanvas"
 									data-modal="user"
 								>
-									<i class="fa-regular fa-user"></i>
-									<span class="fa-regular fa-sign-in" data-fa-transform="shrink-6 right-12"></span>
+									<span class="fa-layers fa-fw">
+										<i class="fa-regular fa-user"></i>
+										<span class="fa-regular fa-sign-in" data-fa-transform="shrink-6 right-12"></span>
+									</span>
 								</button>
 							</div>
-							<div class="navigation__iconbtn-wrap">
-								<a
-									data-bs-tooltip="tooltip"
-									data-bs-placement="bottom"
-									title="View your favourites"
-									href="./favourites.html"
-									class="navigation__iconbtn"
-								>
-									<i class="fa-regular fa-heart"></i>
-								</a>
-							</div>
-							<div class="navigation__iconbtn-wrap">
+							<div class="navigation__iconbtn-wrap" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View your cart">
 								<button
-									title="View your cart"
-									class="fa-layers fa-fw navigation__iconbtn navigation__iconbtn--cart"
-									data-bs-tooltip="tooltip"
-									data-bs-placement="bottom"
-									data-bs-toggle="modal"
-									data-bs-target="#staticBackdrop"
-									data-modal="cart"
+									class="navigation__iconbtn navigation__iconbtn--cart"
+									data-bs-toggle="offcanvas"
+									data-bs-target="#offcanvas"
+									data-canvas="cart"
 								>
-									<i class="fa-regular fa-shopping-cart"></i>
-									<span class="navigation__counter fa-layers-counter">0</span>
+									<span class="fa-layers fa-fw">
+										<i class="fa-regular fa-shopping-cart"></i>
+										<span class="navigation__counter fa-layers-counter">0</span>
+									</span>
 								</button>
 							</div>
 						</div>
@@ -243,6 +250,29 @@
 				</article>
 			</div>
 		</main>
+		<div class="offcanvas offcanvas-end show" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+			<header class="offcanvas-header">
+				<button type="button" class="offcanvas__close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+					<i class="far fa-times"></i>
+				</button>
+				<i class="offcanvas__icon fal fa-user"></i>
+
+				<h2 class="offcanvas-title" id="offcanvasLabel">Sign in</h2>
+			</header>
+			<div class="offcanvas-body">
+				<form class="mt-3 offcanvas__form">
+					<div class="offcanvas__inputwrap form-floating">
+						<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+						<label for="floatingInput">Email address</label>
+					</div>
+					<div class="offcanvas__inputwrap form-floating">
+						<input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+						<label for="floatingPassword">Password</label>
+					</div>
+					<button class="w-100 mt-4 button__primary" type="submit">Sign in</button>
+				</form>
+			</div>
+		</div>
 		<!-- Import Axios -->
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<!-- Import FontAwesome -->

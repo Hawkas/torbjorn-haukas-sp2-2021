@@ -19,6 +19,7 @@
 
 .hero {
 	position: relative;
+	overflow: hidden;
 	background: $hero-gradient;
 	&__content {
 		position: relative;
@@ -81,13 +82,14 @@
 	&__img {
 		display: none;
 		height: 100%;
-		align-self: center;
+		@include fluid-type(width, 768px, 1440px, 315px, 575px);
 		@media only screen and (min-width: 768px) {
 			display: block;
 		}
 		img {
+			object-fit: contain;
+			width: 100%;
 			height: auto;
-			@include fluid-type(width, 768px, 1440px, 315px, 575px);
 		}
 	}
 	&__bodytext {

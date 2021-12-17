@@ -1,0 +1,28 @@
+.offcanvas {
+	background-color: $surface-variant;
+	color: $on-surface;
+	&-header {
+		flex-flow: column;
+		background-color: $surface;
+		background-image: $hero-gradient;
+	}
+	&__close {
+		font-size: 27px;
+		align-self: flex-end;
+	}
+	&-title {
+		text-transform: uppercase;
+		@include primary-fonts(100%, 0.06em, $elementtitle, 700);
+	}
+	&__icon {
+		font-size: 60px;
+		margin-bottom: 30px;
+	}
+	&__form {
+		display: flex;
+		flex-flow: column;
+		gap: 10px;
+	}
+	&__inputwrap {
+	}
+}

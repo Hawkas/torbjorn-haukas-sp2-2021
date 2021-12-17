@@ -5,23 +5,25 @@ a {
 }
 
 .nav-link:hover,
-.nav-link:focus,
 .navigation__iconbtn:hover,
-.navigation__iconbtn:focus {
-	color: rgba($color: $primary-hover, $alpha: 0.7);
-}
-.tooltip {
-	@include primary-fonts(142%, normal, 0.8rem, $regular);
+.navigation__iconbtn--signin:hover .fa-sign-in {
+	color: rgba($primary-hover, $alpha: 0.7);
 }
 
-button,
-.btn {
-	color: $on-primary;
-	background-color: transparent;
-	border: 1px solid transparent;
-	border-radius: 1px;
-	font-family: $primary-font;
-	display: inline-block;
+.navigation__link,
+.navigation__iconbtn,
+.hamburger,
+.navigation__logo-linkwrap {
+	&:focus {
+		outline: medium outset $primary;
+		outline-offset: 5px;
+		&:not(:focus-visible) {
+			outline: none;
+		}
+	}
+	&:focus-visible {
+		outline: medium outset $primary;
+	}
 }
 .button__primary,
 .btn-primary {
@@ -36,7 +38,9 @@ button,
 	text-transform: uppercase;
 	transition: 0.25s;
 	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.15), 0px 0px 0px rgba(0, 0, 0, 0.3);
-
+	&:focus-visible {
+		outline: 4px outset $on-surface;
+	}
 	&:hover,
 	&:focus {
 		color: $on-primary;
@@ -49,113 +53,159 @@ button,
 	color: $primary;
 	border-color: $border-hover;
 }
+.navigation__counter {
+	--fa-counter-background-color: #{$primary-shade4};
+	--fa-inverse: #{$white};
+	--fa-counter-scale: 1;
+	--fa-right: -5px;
+	--fa-top: -7px;
+	@include primary-fonts(100%, 0, 10px, $bold);
+}
+.navigation__iconbtn {
+	padding: 6px;
+	border-radius: 0;
+	padding-bottom: 7px;
+	color: $on-surface-07;
+	line-height: 100%;
+	&--signin {
+		padding-right: 18px; // Adjust for layered icon
+		.fa-sign-in {
+			color: $on-surface-07;
+		}
+	}
+}
+.tooltip {
+	@include primary-fonts(142%, normal, 0.8rem, $regular);
+}
+
+button,
+.btn {
+	color: $on-primary;
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 1px;
+	font-family: $primary-font;
+	display: inline-block;
+}
 
 // Navigation specific stuff
 
-.navigation__hamburger {
-	border-radius: 0;
-}
 .navigation__link {
-	position: relative;
-	padding-bottom: 2px !important;
-	@include primary-fonts(100%, 0.1em, $buttontextslim, $medium);
-	span {
-		display: inline-block;
-		min-height: 23px;
-		position: relative;
+	@include primary-fonts(100%, 0.1em, $navtext, $medium);
+	@media only screen and (max-width: 767.8px) {
+		color: $on-surface !important;
+		background-color: $surface-variant;
+		background-image: $card-gradient;
+		&:hover,
+		&:focus {
+			box-shadow: $card-inset;
+		}
+		&.active {
+			background-color: transparent;
+			background-image: none;
+			box-shadow: none;
+			color: $primary !important;
+		}
 	}
-	&.active span::after {
-		@include pseudoborders();
-		background-color: $primary;
-		height: 2px;
-		bottom: 0;
+	@media only screen and (min-width: 767.8px) {
+		span {
+			display: inline-block;
+			min-height: 23px;
+			position: relative;
+		}
+		&.active span::after {
+			@include pseudoborders();
+			background-color: $primary;
+			height: 2px;
+			bottom: 0;
+		}
+	}
+
+	.fal,
+	.far,
+	.fas,
+	.svg-inline--fa {
+		display: none;
 	}
 }
-/*!
- * Hamburgers
- * @description Tasty CSS-animated hamburgers
- * @author Jonathan Suh @jonsuh
- * @site https://jonsuh.com/hamburgers
- * @link https://github.com/jonsuh/hamburgers
- */
 
-//* And customized by me though :) */
 .hamburger {
 	padding: 8px 15px 8px 0;
 	display: inline-block;
 	background-color: transparent;
 	border: 0;
+	border-radius: 0;
 	margin: 0;
 	overflow: visible;
 	&:focus {
 		color: transparent !important;
 		border-color: transparent !important;
+		outline: auto;
+		&:not(:focus-visible) {
+			outline: none;
+		}
 	}
-}
-.hamburger:hover .hamburger-inner,
-.hamburger:hover .hamburger-inner::before,
-.hamburger:hover .hamburger-inner::after {
-	background-color: rgba($color: $primary-hover, $alpha: 0.7);
-}
+	&:focus-visible {
+		outline: auto;
+	}
+	&:hover &__inner,
+	&:hover &__inner::before,
+	&:hover &__inner::after {
+		background-color: rgba(103, 187, 169, 1);
+	}
 
-.hamburger-box {
-	width: 30px;
-	height: 20px;
-	display: inline-block;
-	position: relative;
-}
+	&__box {
+		width: 30px;
+		height: 20px;
+		display: inline-block;
+		position: relative;
+	}
 
-.hamburger-inner {
-	display: block;
-	top: 50%;
-	margin-top: -2px;
-}
-.hamburger-inner,
-.hamburger-inner::before,
-.hamburger-inner::after {
-	width: 30px;
-	height: 3px;
-	background-color: $on-surface-variant;
-	position: absolute;
-	transition-property: transform;
-	transition-duration: 0.15s;
-	transition-timing-function: ease;
-}
-.hamburger-inner::before,
-.hamburger-inner::after {
-	content: "";
-	display: block;
-}
-.hamburger-inner::before {
-	top: -10px;
-}
-.hamburger-inner::after {
-	bottom: -10px;
-}
+	&__inner {
+		display: block;
+		top: 50%;
+		margin-top: -2px;
+		transition-duration: 0.075s;
+		transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	}
+	&__inner,
+	&__inner::before,
+	&__inner::after {
+		width: 30px;
+		height: 3px;
+		background-color: $on-surface-variant;
+		position: absolute;
+		transition-property: transform;
+		transition-duration: 0.15s;
+		transition-timing-function: ease;
+	}
+	&__inner::before,
+	&__inner::after {
+		content: "";
+		display: block;
+	}
+	&__inner::before {
+		top: -10px;
+		transition: top 0.075s 0.12s ease, opacity 0.075s ease;
+	}
+	&__inner::after {
+		bottom: -10px;
+		transition: bottom 0.075s 0.12s ease, transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	}
 
-.hamburger--squeeze .hamburger-inner {
-	transition-duration: 0.075s;
-	transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-}
-.hamburger--squeeze .hamburger-inner::before {
-	transition: top 0.075s 0.12s ease, opacity 0.075s ease;
-}
-.hamburger--squeeze .hamburger-inner::after {
-	transition: bottom 0.075s 0.12s ease, transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-}
-
-.hamburger--squeeze.is-active .hamburger-inner {
-	transform: rotate(45deg);
-	transition-delay: 0.12s;
-	transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-.hamburger--squeeze.is-active .hamburger-inner::before {
-	top: 0;
-	opacity: 0;
-	transition: top 0.075s ease, opacity 0.075s 0.12s ease;
-}
-.hamburger--squeeze.is-active .hamburger-inner::after {
-	bottom: 0;
-	transform: rotate(-90deg);
-	transition: bottom 0.075s ease, transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+	&:not(.collapsed) &__inner {
+		transform: rotate(45deg);
+		transition-delay: 0.12s;
+		transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+	}
+	&:not(.collapsed) &__inner::before {
+		top: 0;
+		opacity: 0;
+		transition: top 0.075s ease, opacity 0.075s 0.12s ease;
+	}
+	&:not(.collapsed) &__inner::after {
+		bottom: 0;
+		transform: rotate(-90deg);
+		transition: bottom 0.075s ease, transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+	}
 }
