@@ -6,13 +6,13 @@ a {
 
 .nav-link:hover,
 .navigation__iconbtn:hover,
-.navigation__iconbtn--signin:hover .fa-sign-in {
+.navigation__iconbtn--signin:hover .layer-icon {
 	color: rgba($primary-hover, $alpha: 0.7);
 }
 
+button,
 .navigation__link,
 .navigation__iconbtn,
-.hamburger,
 .navigation__logo-linkwrap {
 	&:focus {
 		outline: medium outset $primary;
@@ -25,6 +25,20 @@ a {
 		outline: medium outset $primary;
 	}
 }
+
+.offcanvas__btn {
+	&:focus {
+		outline: medium outset $primary;
+		outline-offset: -4px;
+		&:not(:focus-visible) {
+			outline: none;
+		}
+	}
+	&:focus-visible {
+		outline: medium outset $primary;
+	}
+}
+
 .button__primary,
 .btn-primary {
 	position: relative;
@@ -38,11 +52,17 @@ a {
 	text-transform: uppercase;
 	transition: 0.25s;
 	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.15), 0px 0px 0px rgba(0, 0, 0, 0.3);
-	&:focus-visible {
-		outline: 4px outset $on-surface;
+
+	.spinner-border {
+		margin-right: 10px;
 	}
-	&:hover,
-	&:focus {
+	&.login-success {
+		box-shadow: $card-inset;
+		background-color: $primary;
+		background-image: $card-gradient;
+	}
+	&:not(.login-success):hover,
+	&:not(.login-success):focus {
 		color: $on-primary;
 		background-color: $primary-hover;
 		box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -69,7 +89,10 @@ a {
 	line-height: 100%;
 	&--signin {
 		padding-right: 18px; // Adjust for layered icon
-		.fa-sign-in {
+		.hide {
+			display: none;
+		}
+		.layer-icon {
 			color: $on-surface-07;
 		}
 	}
@@ -89,23 +112,20 @@ button,
 }
 
 // Navigation specific stuff
-
+.offcanvas__btn {
+	@include primary-fonts(100%, 0.1em, $navtext, $medium);
+	@include verticalButtonMenu(30px);
+}
 .navigation__link {
 	@include primary-fonts(100%, 0.1em, $navtext, $medium);
+	.fal,
+	.far,
+	.fas,
+	.svg-inline--fa {
+		display: none;
+	}
 	@media only screen and (max-width: 767.8px) {
-		color: $on-surface !important;
-		background-color: $surface-variant;
-		background-image: $card-gradient;
-		&:hover,
-		&:focus {
-			box-shadow: $card-inset;
-		}
-		&.active {
-			background-color: transparent;
-			background-image: none;
-			box-shadow: none;
-			color: $primary !important;
-		}
+		@include verticalButtonMenu(var(--margin));
 	}
 	@media only screen and (min-width: 767.8px) {
 		span {
@@ -119,13 +139,6 @@ button,
 			height: 2px;
 			bottom: 0;
 		}
-	}
-
-	.fal,
-	.far,
-	.fas,
-	.svg-inline--fa {
-		display: none;
 	}
 }
 

@@ -51,5 +51,5 @@ export const hideOnBlur = function (parentContainer, elementToHide) {
 export const signOut = function () {
 	localStorage.removeItem("user");
 	localStorage.removeItem("jwt");
-	window.location.href = "./index.html";
+	console.log(window.location.href);
 };

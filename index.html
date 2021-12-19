@@ -18,7 +18,6 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link rel="preconnect" href="https://kit.fontawesome.com" crossorigin />
-		<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 		<!-- [2] -->
 		<link
 			rel="preload"
@@ -85,31 +84,39 @@
 					</div>
 					<div class="navigation__right">
 						<div class="navigation__iconbuttons">
-							<div
-								class="navigation__iconbtn-wrap"
-								title="Sign in"
-								data-bs-toggle="tooltip"
-								data-bs-trigger="hover"
-								data-bs-placement="bottom"
-							>
+							<div class="navigation__iconbtn-wrap">
 								<button
+									aria-label="User menu"
 									class="navigation__iconbtn navigation__iconbtn--signin"
 									data-bs-toggle="offcanvas"
 									data-bs-target="#offcanvas"
-									data-modal="user"
+									data-canvas="login"
+									data-bs-tooltip="tooltip"
+									data-bs-trigger="hover"
+									data-bs-placement="bottom"
+									title="Sign in"
 								>
-									<span class="fa-layers fa-fw">
+									<span class="fa-layers fa-fw no-user show">
 										<i class="fa-regular fa-user"></i>
-										<span class="fa-regular fa-sign-in" data-fa-transform="shrink-6 right-12"></span>
+										<span class="fa-regular layer-icon fa-sign-in" data-fa-transform="shrink-6 right-12"></span>
+									</span>
+									<span class="fa-layers fa-fw yes-user hide">
+										<i class="fa-light fa-user-crown"></i>
+										<span class="fa-regular layer-icon fa-cog" data-fa-transform="shrink-6 right-12"></span>
 									</span>
 								</button>
 							</div>
-							<div class="navigation__iconbtn-wrap" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View your cart">
+							<div class="navigation__iconbtn-wrap">
 								<button
+									aria-label="View your cart"
 									class="navigation__iconbtn navigation__iconbtn--cart"
 									data-bs-toggle="offcanvas"
 									data-bs-target="#offcanvas"
 									data-canvas="cart"
+									data-bs-tooltip="tooltip"
+									data-bs-trigger="hover"
+									data-bs-placement="bottom"
+									title="View your cart"
 								>
 									<span class="fa-layers fa-fw">
 										<i class="fa-regular fa-shopping-cart"></i>
@@ -122,8 +129,11 @@
 				</div>
 			</nav>
 		</header>
+		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+			<div class="offcanvas__inner"></div>
+		</div>
 		<main class="main main--home">
-			<header class="hero">
+			<header class="hero" aria-labelledby="hero-title">
 				<div class="custom-shape-divider-bottom-1639521041">
 					<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
 						<filter id="inset-shadow">
@@ -163,7 +173,7 @@
 					/>
 					<img aria-hidden="true" src="./media/herologo-right.svg" alt="" class="hero__bgsvg hero__bgsvg--right" />
 					<div class="hero__textblock">
-						<h1 class="hero__title">
+						<h1 class="hero__title" id="hero-title">
 							<span class="animate__animated animate__fadeInLeft animate__faster">NFT</span>
 							<span class="hero__title--slim animate__animated animate__fadeInLeft animate__fast">
 								The&nbsp;Future&nbsp;of Art&nbsp;Collection
@@ -181,9 +191,9 @@
 					</div>
 				</div>
 			</header>
-			<div class="info">
-				<article class="info__content">
-					<h2 class="info__title">How it works</h2>
+			<article class="info" aria-labelledby="info-title">
+				<div class="info__content">
+					<h2 class="info__title" id="info-title">How it works</h2>
 					<div class="info__wrapper">
 						<article class="info__card info__card--what">
 							<h3 class="info__cardtitle">What are NFTs?</h3>
@@ -247,32 +257,93 @@
 							</div>
 						</article>
 					</div>
-				</article>
-			</div>
+				</div>
+				<div class="custom-shape-divider-bottom-1639881892">
+					<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+						<path d="M598.97 114.72L0 0 0 120 1200 120 1200 0 598.97 114.72z" class="shape-fill"></path>
+					</svg>
+				</div>
+			</article>
+			<section class="cards cards--featured">
+				<h2 class="cards__sectiontitle">Featured artworks</h2>
+				<div class="cards__content">
+					<div class="cards__grid row row-cols-1 row-cols-md-2 row-cols-xxl-3 g-3">
+						<article class="col cards__cardwrap">
+							<div class="card cards__card">
+								<img
+									src="https://hawkas-bucket.s3.eu-north-1.amazonaws.com/medium_futuristicknight_3cb1a6ef35.jpeg"
+									width="750"
+									height="422"
+									alt=""
+									class="card-img-top cards__img img-fluid"
+									loading="lazy"
+								/>
+								<div class="card-body cards__body">
+									<p class="cards__creator card-subtitle">
+										<i class="far fa-user"></i>
+										<span>grandfailure</span>
+									</p>
+									<h3 class="card-title cards__title">Journey's Beginning</h3>
+									<p class="card-text cards__bodytext text-truncate">
+										Ever feel like travelling through a sci-fi portal while on a horse and suited up in combat gear a couple
+										centuries out of fashion? Me too.
+									</p>
+									<h4 class="cards__pricelabel card-subtitle">Current Price</h4>
+									<p class="cards__price">$2500</p>
+								</div>
+								<div class="cards__footer">
+									<button
+										class="cards__favourite button__outlined"
+										aria-label="Save to favourites"
+										data-bs-tooltip="tooltip"
+										data-bs-trigger="hover"
+										data-bs-placement="top"
+										title="Save to favourites"
+									>
+										<i class="far fa-heart"></i>
+									</button>
+									<button class="button__primary cards__cart">
+										<span class="fa-layers fa-fw">
+											<i class="far fa-shopping-cart"></i>
+											<span class="far fa-slash"></span>
+										</span>
+										<span class="cards__btntext">Add To Cart</span>
+									</button>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
 		</main>
-		<div class="offcanvas offcanvas-end show" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-			<header class="offcanvas-header">
-				<button type="button" class="offcanvas__close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
-					<i class="far fa-times"></i>
-				</button>
-				<i class="offcanvas__icon fal fa-user"></i>
+		<footer class="footer">
+			<h2 class="visually-hidden">Footer</h2>
+			<div class="footer__content d-flex">
+				<div class="footer__logo">
+					<img src="./media/Logo.svg" alt="Ethereal Logo" class="footer__img" width="158" height="54" />
+				</div>
 
-				<h2 class="offcanvas-title" id="offcanvasLabel">Sign in</h2>
-			</header>
-			<div class="offcanvas-body">
-				<form class="mt-3 offcanvas__form">
-					<div class="offcanvas__inputwrap form-floating">
-						<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-						<label for="floatingInput">Email address</label>
-					</div>
-					<div class="offcanvas__inputwrap form-floating">
-						<input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
-						<label for="floatingPassword">Password</label>
-					</div>
-					<button class="w-100 mt-4 button__primary" type="submit">Sign in</button>
-				</form>
+				<div class="footer__text">
+					<small class="footer__crtext">© 2021 Ethereal. No rights reserved</small>
+					<small class="footer__disclaimer">
+						This website was made as part of a school assignment and does not offer any real services whatsoever.
+						It's&nbsp;all&nbsp;fake. And for the record, NFTs are stupid.
+					</small>
+				</div>
+				<div class="footer__buttonwrap">
+					<button
+						aria-label="Back to top"
+						class="footer__elevator navigation__iconbtn"
+						data-bs-tooltip="tooltip"
+						data-bs-trigger="hover"
+						data-bs-placement="top"
+						title="Back to top"
+					>
+						<i class="fal fa-arrow-square-up"></i>
+					</button>
+				</div>
 			</div>
-		</div>
+		</footer>
 		<!-- Import Axios -->
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<!-- Import FontAwesome -->

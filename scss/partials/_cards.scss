@@ -1,0 +1,108 @@
+.cards {
+	padding-top: 100px;
+	padding-bottom: 100px;
+	background-color: $surface-hue;
+	color: $on-surface;
+	position: relative;
+
+	&__sectiontitle {
+		z-index: 1;
+		@extend .info__title;
+		@extend %layoutwidth;
+	}
+	&__card {
+		border-radius: 0;
+		padding: 15px;
+		border: 2px solid $border;
+		background-color: $surface;
+		background-image: $card-gradient;
+		transition: 0.25s ease;
+		&:hover {
+			border: 2px solid rgba($color: $border-hover, $alpha: 0.7);
+			box-shadow: $card-elevated;
+		}
+	}
+	&__img {
+		border-radius: 0;
+		padding-bottom: 18px;
+	}
+	&__body {
+		padding: 24px 12px;
+		background-color: rgba($color: $surface, $alpha: 0.9);
+		box-shadow: $card-inset;
+		border: 1px solid $card-inner-border;
+	}
+
+	&__title,
+	&__price {
+		@include primary-fonts(100%, 0.25px, $cardtitle, 700);
+		margin-bottom: 0;
+	}
+
+	&__title {
+		position: relative;
+		min-height: 56px;
+		font-weight: 500;
+		line-height: 127%;
+		margin-bottom: 16px;
+
+		&:after {
+			@include pseudoborders();
+			background-color: $card-inner-border;
+			bottom: 0;
+		}
+	}
+	&__bodytext {
+		@include primary-fonts(24px, 0.1px);
+		margin-bottom: 16px;
+	}
+	&__creator,
+	&__pricelabel {
+		margin-top: 0;
+		color: $on-surface-07;
+		@include primary-fonts(182%, 0.25px, $smalltext-card);
+	}
+	&__innerflex {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		margin-bottom: 20px;
+	}
+	&__footer {
+		display: flex;
+		padding: 30px 0 4px;
+		justify-content: flex-end;
+		gap: 8px;
+		& > * {
+			height: 40px;
+		}
+	}
+
+	&__cart {
+		@include primary-fonts(143%, 0.1px, $buttontextslim, 500);
+		text-transform: none;
+	}
+	&__cart {
+		font-weight: 600;
+		padding: 10px 24px 10px 16px;
+		white-space: nowrap;
+		& .fa-layers {
+			margin-right: 10px;
+		}
+	}
+
+	&__favourite {
+		border: 1px solid $border-hover;
+		padding: 10px 24px;
+		color: $primary;
+	}
+	&__favourite {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-right: auto;
+		height: 40px;
+		max-width: 40px;
+		font-size: 20px;
+	}
+}

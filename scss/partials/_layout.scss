@@ -15,7 +15,7 @@ body {
 	@include body-layout(905px, auto, 840px);
 	@include body-layout(1040px, 100px, auto);
 	@include body-layout(1240px, 156px, auto);
-	@include body-layout(1440px, auto, 1040px);
+	@include body-layout(1440px, auto, 1126px);
 }
 
 .navigation {
@@ -25,7 +25,9 @@ body {
 	}
 }
 .hero,
-.info {
+.info,
+.footer,
+.cards {
 	width: 100%;
 	&__content {
 		@extend %layoutwidth;

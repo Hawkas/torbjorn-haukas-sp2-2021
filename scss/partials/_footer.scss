@@ -1,0 +1,78 @@
+.footer {
+	background-color: $black;
+	width: 100%;
+	min-height: 200px;
+	height: 200px;
+	@include primary-fonts(130%, 0, $smalltext);
+	color: rgba($color: $on-surface, $alpha: 0.8);
+	text-align: center;
+	padding: {
+		top: 24px;
+		bottom: 54px;
+	}
+	&__content {
+		height: 100%;
+		justify-content: space-between;
+		flex-flow: wrap;
+		align-items: flex-start;
+		align-content: baseline;
+		& > * {
+			flex: 1 1 33.33%;
+		}
+	}
+	&__logo {
+		display: flex;
+		margin-top: 40px;
+		flex-flow: column;
+		justify-content: flex-end;
+	}
+	&__text {
+		margin: 33px 0 0;
+		align-self: flex-end;
+		font-size: 1.2em;
+		& > * {
+			min-width: 220px;
+			max-width: 220px;
+			margin: 0 auto;
+		}
+	}
+	&__crtext {
+		margin-bottom: 8px;
+	}
+	&__disclaimer {
+		display: flex;
+		justify-content: center;
+		margin-top: 10px;
+		margin-bottom: 0;
+		opacity: 0.7;
+		font-size: 0.9em;
+	}
+	&__buttonwrap {
+		display: flex;
+		flex-flow: column;
+		height: 100%;
+		justify-content: center;
+		margin-top: 13px;
+	}
+	&__elevator {
+		align-self: flex-end;
+		padding: 0;
+		font-size: 40px;
+	}
+	@media only screen and (max-width: 767.8px) {
+		height: auto;
+		padding-bottom: 15px;
+		&__content {
+			flex-flow: column;
+		}
+		&__buttonwrap {
+			margin-top: 30px;
+			align-self: flex-end;
+		}
+		&__logo,
+		&__text {
+			margin-top: 0;
+			align-self: center;
+		}
+	}
+}

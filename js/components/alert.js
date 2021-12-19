@@ -5,5 +5,5 @@ export default function alert(cssClass, errorMessage, element = document.querySe
 
 	setTimeout(() => {
 		element.innerHTML = "";
-	}, 3000);
+	}, 5000);
 }

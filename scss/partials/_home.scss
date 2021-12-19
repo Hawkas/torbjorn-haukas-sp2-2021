@@ -1,4 +1,5 @@
-.custom-shape-divider-bottom-1639521041 {
+.custom-shape-divider-bottom-1639521041,
+.custom-shape-divider-bottom-1639881892 {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -17,6 +18,13 @@
 	}
 }
 
+.custom-shape-divider-bottom-1639881892 {
+	svg {
+		.shape-fill {
+			fill: $surface;
+		}
+	}
+}
 .hero {
 	position: relative;
 	overflow: hidden;
@@ -98,6 +106,7 @@
 	}
 }
 .info {
+	position: relative;
 	width: 100%;
 	background-color: #1c1c2d;
 	background-image: url("./../../media/info-bgsvg.svg");
@@ -126,6 +135,27 @@
 		display: none;
 	}
 	@media only screen and (min-width: 784px) {
+		&__wrapper {
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 276px max-content 0.8fr 20px auto;
+			grid-gap: 0px 20px;
+			grid-template-areas:
+				"what arr1"
+				"what exam"
+				"arr2 exam"
+				".    .   "
+				"why  .   ";
+
+			@media only screen and (min-width: 1400px) {
+				grid-template-areas:
+					"what arr1 .   "
+					"what exam arr2"
+					"what exam why "
+					".    exam why ";
+				grid-template-columns: repeat(3, 1fr);
+				grid-template-rows: 276px 215px 0.3fr 1fr;
+			}
+		}
 		&__arrow {
 			display: block;
 			width: 50%;
@@ -155,27 +185,6 @@
 		}
 		&__card--why {
 			grid-area: why;
-		}
-		&__wrapper {
-			grid-template-columns: 1fr 1fr;
-			grid-template-rows: 276px max-content 0.8fr 20px auto;
-			grid-gap: 0px 20px;
-			grid-template-areas:
-				"what arr1"
-				"what exam"
-				"arr2 exam"
-				".    .   "
-				"why  .   ";
-
-			@media only screen and (min-width: 1400px) {
-				grid-template-areas:
-					"what arr1 .   "
-					"what exam arr2"
-					"what exam why "
-					".    exam why ";
-				grid-template-columns: repeat(3, 1fr);
-				grid-template-rows: 276px 215px 0.3fr 1fr;
-			}
 		}
 	}
 

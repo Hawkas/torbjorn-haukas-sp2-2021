@@ -13,7 +13,7 @@ const {
 
 function renderToHtml(array, filterString = false, dashboardBoolean = false) {
 	try {
-		const cardsContainer = document.querySelector(".cards__container");
+		const cardsContainer = document.querySelector(".cards__grid");
 
 		//* If called by search inputs, filter the contents of the array
 		if (filterString) {

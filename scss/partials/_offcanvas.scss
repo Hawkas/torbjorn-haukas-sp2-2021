@@ -1,10 +1,30 @@
 .offcanvas {
 	background-color: $surface-variant;
 	color: $on-surface;
+
+	&__inner {
+		transform: translateZ(0);
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		min-height: 100%;
+		&.hide {
+			.animated__animate {
+				display: none;
+			}
+		}
+	}
 	&-header {
 		flex-flow: column;
 		background-color: $surface;
 		background-image: $hero-gradient;
+	}
+	&__body {
+		height: 100%;
+		background-color: $surface-variant;
+		&.position-relative {
+			height: 100%;
+		}
 	}
 	&__close {
 		font-size: 27px;
@@ -22,7 +42,67 @@
 		display: flex;
 		flex-flow: column;
 		gap: 10px;
+		label::selection,
+		label::-moz-selection {
+			background-color: transparent;
+		}
+		input {
+			@include primary-fonts();
+			font-size: $bodytext;
+			font-weight: 500;
+			&:focus {
+				outline: medium outset $primary;
+				&:not(:focus-visible) {
+					outline: none;
+				}
+			}
+			&:focus-visible {
+				outline: medium outset $primary;
+			}
+			&:-webkit-autofill {
+				box-shadow: 0 0 0 50px $surface inset;
+				-webkit-box-shadow: 0 0 0 50px $surface inset; // Auto filled inputs were behaving oddly
+				-webkit-text-fill-color: $on-surface;
+			}
+			&:disabled,
+			&:-webkit-autofill:disabled {
+				background-color: $surface;
+				opacity: 0.5;
+			}
+			::placeholder::selection,
+			::-moz-selection {
+				background-color: transparent;
+			}
+		}
 	}
-	&__inputwrap {
+	&__signed-in {
+		padding: 0;
+		top: 0;
+		bottom: 0;
+		//? Make it full-width by positioning by negative of page margin value.
+		right: -30px;
+		left: -30px;
+	}
+	.toast {
+		width: 100%;
+		background-color: $surface;
+		&-header {
+			align-items: center;
+			letter-spacing: 0.1em;
+			background-color: $primary-shade4;
+			background-image: $hero-gradient;
+			color: white;
+			font-size: 30px;
+			p {
+				font-size: 1.125rem;
+				margin: 0;
+				font-weight: 500;
+			}
+		}
+		&-body {
+			& p {
+				@include primary-fonts(24px, 1px);
+			}
+		}
 	}
 }

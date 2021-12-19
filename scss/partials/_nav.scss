@@ -1,8 +1,33 @@
+.navigation-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1037;
+	width: 100vw;
+	height: 100vh;
+	background-color: #0d0e12;
+	&.fade {
+		opacity: 0;
+		transition: opacity 0.15s linear;
+	}
+	&.show {
+		opacity: 0.5;
+	}
+}
+
 .navigation {
-	z-index: 5;
+	z-index: 1038;
 	background-color: $surface-variant;
 	color: $on-surface-07;
 	box-shadow: $card-elevated;
+	transform: translateY(0%);
+	transition: transform 0.25s ease;
+	&.scroll-down {
+		transform: translateY(-100%);
+	}
+	&.scroll-up {
+		transform: translateY(0%);
+	}
 	&__navbar {
 		padding: 9px 0;
 	}
@@ -45,6 +70,18 @@
 		&__iconbtn--signin {
 			padding-right: 12px;
 		}
+
+		@media only screen and (max-width: 360px) {
+			/* Just to squeeze it all in for displays at 320px, which is as low as I'll go */
+			&__iconbtn {
+				padding-right: 3px;
+				padding-left: 3px;
+			}
+			&__iconbtn--signin {
+				padding-right: 6px;
+			}
+		}
+
 		&__navbar {
 			padding: 0px;
 		}
@@ -95,24 +132,6 @@
 				@include pseudoborders;
 				background-color: $on-primary-012;
 				top: 0;
-			}
-		}
-		&__link {
-			padding: 30px var(--margin) !important;
-			width: 100%;
-			display: flex;
-			justify-content: space-between;
-			font-size: $navtext;
-			&:not(.active):hover {
-				// just a quick band-aid as I noticed the color was weak on dropdown bg
-				color: $primary-hover !important;
-			}
-			.far,
-			.fal,
-			.fas,
-			.svg-inline--fa {
-				display: inline-block;
-				margin-right: 5px;
 			}
 		}
 	}

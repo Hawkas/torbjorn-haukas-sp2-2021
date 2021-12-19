@@ -82,3 +82,33 @@
 		}
 	}
 }
+// Collective styling for dropdown menu button and offcanvas button
+@mixin verticalButtonMenu($sidepadding) {
+	color: $on-surface !important;
+	background-color: $surface-variant;
+	background-image: $card-gradient;
+	padding: 30px $sidepadding !important;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	&:not(.active):hover {
+		color: $primary-hover !important;
+	}
+	.far,
+	.fal,
+	.fas,
+	.svg-inline--fa {
+		display: inline-block;
+		margin-right: 10px;
+	}
+	&:hover,
+	&:focus {
+		box-shadow: $card-inset;
+	}
+	&.active {
+		background-color: transparent;
+		background-image: none;
+		box-shadow: none;
+		color: $primary !important;
+	}
+}

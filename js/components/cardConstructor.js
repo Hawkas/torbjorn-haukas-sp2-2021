@@ -7,82 +7,85 @@ const {
 	itemKeyContent: descriptionKey,
 	itemKeyPrice: priceKey,
 } = apiPropertyKeys;
-
-export const buildCardHtml = function (object, dashboardBoolean) {
+function imageSorter(imageMedia, size = "medium") {
+	let formats = imageMedia[0].formats;
+	let alt = imageMedia[0].alternativeText;
+	const { url, height, width } = formats[`${size}`];
+	return { url, height, width, alt };
+}
+export const buildCardHtml = function (object, featured = false) {
 	let title = object[`${titleKey}`];
 	let creator = object[`${creatorKey}`];
 	let description = object[`${descriptionKey}`];
 	let id = object.id;
 	let price = object[`${priceKey}`];
+	let image = imageSorter(object.image_media);
+
 	let favourites = getFromStorage("favourites");
+	let cart = getFromStorage("cart");
+
 	let cardHtml = "";
-	let iconsHtml = "";
+
+	//* If the object is in cart, cart button should reflect this.
+	let isInCart = cart.find((savedObject) => savedObject.id === id);
+
 	let isInStorage = favourites.find((savedObject) => savedObject.id === id);
+
 	//* If the object is found in localStorage, make sure it has the proper visual indicator
 	let faClass = "far";
+	if (isInCart !== undefined) {
+		inCart = "remove";
+	}
 	if (isInStorage !== undefined) {
 		faClass = "far fas";
 	}
-	iconsHtml = `
-        <i 
-            class="${faClass} fa-heart card__icon" 
-            title="Add to favourites" 
-            aria-label="Add to Favourites" 
-            tabindex="0" 
-            data-title="${title}" 
-            data-id="${id}"
-        >
-        </i>`;
-	//* If the window location is the dashboard, I'm just making a slight alteration to the displayed cards, rather than rewriting them entirely.
-	if (dashboardBoolean) {
-		iconsHtml = `
-            <div class="card__buttons">
-                <div class="btn-toolbar" role="toolbar">
-                    <div class="card__btngroup btn-group" role="group" aria-label="Toolbar buttons">
-                        <button 
-                            type="button"
-                            title="Delete article"
-                            aria-label="Delete article"
-                            class="btn btn-outline-secondary btn-delete"
-                            data-id="${id}"
-                        >
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                        <button
-                            type="button" 
-                            aria-label="Edit article" 
-                            class="btn btn-outline-secondary" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#staticBackdrop" 
-                            data-modal="edit" 
-                            data-id="${id}"
-                        >
-                            <i class="fas fa-edit"></i>
-                        </button>
-                    </div>
-                </div>
-                <i class="${faClass}
-                    fa-heart card__icon" 
-                    title="Add to favourites" 
-                    aria-label="Add to Favourites" 
-                    tabindex="0" 
-                    data-title="${title}" 
-                    data-id="${id}"
-                >
-                </i>
-            </div>`;
-	}
+
+	if (image.alt === "") image.alt = `${title} by ${creator}`;
+
 	cardHtml = `
-    <div class="col card__outer">
-        <article class="card h-100">
-            <div class="card-body">
-                <h2 class="card-title">${title}</h2>
-                <p class="card-subtitle text-muted mb-2"><i class="fas fa-user"></i> ${creator}</p>
-                <p class="card-text">${description}</p>
-                ${iconsHtml}
+    <article class="col cards__cardwrap">
+        <div class="card cards__card">
+            <img
+                src="${image.url}"
+                width="${image.width}"
+                height="${image.height}"
+                alt="${image.alt}"
+                class="card-img-top cards__img img-fluid"
+                loading="lazy"
+            />
+            <div class="card-body cards__body">
+                <p class="cards__creator card-subtitle">
+                    <i class="far fa-user"></i>
+                    <span>${creator}</span>
+                </p>
+                <h3 class="card-title cards__title">${title}</h3>
+                <p class="card-text cards__bodytext text-truncate">${description}</p>
+                <h4 class="cards__pricelabel card-subtitle">Current Price</h4>
+                <p class="cards__price">$${price}</p>
             </div>
-        </article>
-    </div>`;
+            <div class="cards__footer">
+                <button
+                    class="cards__favourite button__outlined"
+                    aria-label="Save to favourites"
+                    data-bs-tooltip="tooltip"
+                    data-bs-trigger="hover"
+                    data-bs-placement="top"
+                    data-id="${id}"
+                    data-
+                    title="Save to favourites"
+                >
+                    <i class="${faClass} fa-heart"></i>
+                </button>
+                <button class="button__primary cards__cart ${inCart}">
+                    <span class="fa-layers fa-fw">
+                        <i class="far fa-shopping-cart"></i>
+                        <span class="far fa-slash"></span>
+                    </span>
+                    <span class="cards__btntext">Add To Cart</span>
+                </button>
+            </div>
+        </div>
+    </article>`;
 	return cardHtml;
 };
 
