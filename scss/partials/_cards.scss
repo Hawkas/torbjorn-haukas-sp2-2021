@@ -10,6 +10,9 @@
 		@extend .info__title;
 		@extend %layoutwidth;
 	}
+	&__grid {
+		position: relative;
+	}
 	&__card {
 		border-radius: 0;
 		padding: 15px;
@@ -60,7 +63,7 @@
 	&__pricelabel {
 		margin-top: 0;
 		color: $on-surface-07;
-		@include primary-fonts(182%, 0.25px, $smalltext-card);
+		@include primary-fonts(142%, 0.25px, $smalltext-card);
 	}
 	&__innerflex {
 		display: flex;
@@ -79,13 +82,27 @@
 	}
 
 	&__cart {
-		@include primary-fonts(143%, 0.1px, $buttontextslim, 500);
-		text-transform: none;
-	}
-	&__cart {
+		@include primary-fonts(143%, 0.1px, $buttontext, 500);
 		font-weight: 600;
 		padding: 10px 24px 10px 16px;
 		white-space: nowrap;
+		transition: 0.25s ease-in-out;
+		&.add-to-cart .fa-slash {
+			display: none;
+		}
+		&.remove-from-cart {
+			background-color: $red;
+			color: $on-surface;
+			transition: 0.25s ease-in-out;
+			&:hover,
+			&:focus {
+				background-color: rgba($color: $red, $alpha: 0.6);
+				color: $on-surface;
+			}
+			& .fa-slash {
+				display: block;
+			}
+		}
 		& .fa-layers {
 			margin-right: 10px;
 		}
@@ -95,6 +112,9 @@
 		border: 1px solid $border-hover;
 		padding: 10px 24px;
 		color: $primary;
+		&:hover {
+			background-color: rgba($color: $surface, $alpha: 0.9);
+		}
 	}
 	&__favourite {
 		display: flex;
@@ -104,5 +124,40 @@
 		height: 40px;
 		max-width: 40px;
 		font-size: 20px;
+	}
+}
+.lds-ring {
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 80px;
+}
+.lds-ring div {
+	box-sizing: border-box;
+	display: block;
+	position: absolute;
+	width: 64px;
+	height: 64px;
+	margin: 8px;
+	border: 8px solid #dfc;
+	border-radius: 50%;
+	animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+	border-color: #dfc transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+	animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+	animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+	animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
 	}
 }

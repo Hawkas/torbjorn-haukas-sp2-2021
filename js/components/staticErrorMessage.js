@@ -1,4 +1,4 @@
-const cardsContainer = document.querySelector(".cards__container");
+const cardsContainer = document.querySelector(".cards__grid");
 
 export const noResults = function () {
 	cardsContainer.innerHTML = `

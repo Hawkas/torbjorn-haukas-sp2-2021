@@ -79,7 +79,12 @@ button,
 	--fa-counter-scale: 1;
 	--fa-right: -5px;
 	--fa-top: -7px;
+	transition: transform 0.25s ease-in;
 	@include primary-fonts(100%, 0, 10px, $bold);
+	&.changing {
+		--fa-counter-scale: 3;
+		transition: transform 0.25s ease-out;
+	}
 }
 .navigation__iconbtn {
 	padding: 6px;
@@ -116,6 +121,36 @@ button,
 	@include primary-fonts(100%, 0.1em, $navtext, $medium);
 	@include verticalButtonMenu(30px);
 }
+.super-secret .fa-question,
+.super-secret .svg-inline--fa {
+	display: block !important;
+	font-size: 20px;
+}
+.super-secret {
+	margin-top: 0;
+	align-items: center;
+}
+.super-secret.active .nav-link {
+	position: relative;
+	margin-top: 0;
+	margin-bottom: 10px;
+	padding-bottom: 6px;
+	&::after {
+		@include pseudoborders();
+		background-color: $primary;
+		height: 2px;
+		bottom: 0;
+	}
+}
+.button__create {
+	padding: 15px 18px 15px 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	& span {
+		margin-right: 10px;
+	}
+}
 .navigation__link {
 	@include primary-fonts(100%, 0.1em, $navtext, $medium);
 	.fal,
@@ -124,6 +159,7 @@ button,
 	.svg-inline--fa {
 		display: none;
 	}
+
 	@media only screen and (max-width: 767.8px) {
 		@include verticalButtonMenu(var(--margin));
 	}

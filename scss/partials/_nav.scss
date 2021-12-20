@@ -14,7 +14,9 @@
 		opacity: 0.5;
 	}
 }
-
+.super-secret .fa-svg--inline {
+	display: block !important;
+}
 .navigation {
 	z-index: 1038;
 	background-color: $surface-variant;

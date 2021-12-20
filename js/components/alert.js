@@ -1,4 +1,4 @@
-export default function alert(cssClass, errorMessage, element = document.querySelector(".alert")) {
+export default function alert(cssClass, errorMessage, element = document.querySelector(".alert--card")) {
 	element.innerHTML = `<div class="alert  ${cssClass}">
     ${errorMessage}
   </div>`;

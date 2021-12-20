@@ -1,11 +1,13 @@
 import { adjustOffcanvas } from "./offcanvas.js";
 import navBehavior from "./navBehavior.js";
-import changeUserBtn from "./changeUserBtn.js";
+import { changeCounter, changeUserBtn } from "./changeNavButtons.js";
 
 const adjustInterface = function () {
 	const footerBtn = document.querySelector(".footer__elevator");
 	navBehavior(); //? Hide on scroll-down, add backdrop when dropdown is open, toggle. all that jazz.
 	changeUserBtn(); //? Edit the user icon button to open the correct menu, and alter its appearance.
+	changeCounter(); //? Update cart icon's counter.
+
 	footerBtn.onclick = () => {
 		document.documentElement.scrollTop = 0;
 	};

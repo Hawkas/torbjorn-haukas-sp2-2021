@@ -1,4 +1,5 @@
 /* Color styles */
+
 $white: rgba(255, 255, 255, 1);
 $black: rgba(13, 14, 18, 1);
 $gray: rgba(153, 176, 167, 1);
@@ -68,6 +69,7 @@ $dark: $surface-variant;
 $navbar-dark-active-color: $on-surface;
 $navbar-dark-color: $on-surface-07;
 $navbar-dark-hover-color: rgba($primary-hover, 0.7);
+
 //! I'm using bootstrap's scss locally so I can change some of its variables
 //? Because selector specificity is a hassle :)
 @import "../../bootstrap-5.1.3/scss/bootstrap";

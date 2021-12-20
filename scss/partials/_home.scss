@@ -17,7 +17,18 @@
 		}
 	}
 }
-
+// Hacky and likely to break, but firefox doesn't behave well with SVG filters o.o
+@supports (-moz-appearance: none) {
+	.custom-shape-divider-bottom-1639521041,
+	.custom-shape-divider-bottom-1639881892 {
+		svg {
+			filter: none;
+			.shape-fill {
+				fill: #1c1c2d;
+			}
+		}
+	}
+}
 .custom-shape-divider-bottom-1639881892 {
 	svg {
 		.shape-fill {

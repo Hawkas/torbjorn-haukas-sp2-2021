@@ -1,7 +1,18 @@
 html {
 	font-size: 16px;
 }
-
+::-webkit-scrollbar {
+	background: rgba($color: $surface-hue, $alpha: 0.4);
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: $black;
+}
+body {
+	overflow: overlay;
+}
 body {
 	background-color: $surface;
 	color: $on-surface;

@@ -1,9 +1,30 @@
 //** Adjusting for direct interactions with the navigation contents, and conditional changes to buttons.
-import { getUser } from "../libs/localStorageHelper.js";
+import { getUser, getFromStorage } from "../libs/storageHelper.js";
 
 const userButton = document.querySelector(".navigation__iconbtn--signin");
+const counter = document.querySelector(".navigation__counter");
 
-const changeUserBtn = function () {
+function recountIt(e) {
+	let counterInt = getFromStorage("cart").length;
+	if (e) {
+		counter.classList.toggle("changing");
+		if (e.detail) {
+			counter.innerHTML = parseInt(counterInt) + 1;
+		}
+		if (!e.detail) counter.innerHTML = `${parseInt(counterInt) - 1}`;
+		setTimeout(() => {
+			this.classList.toggle("changing");
+		}, 500);
+	} else {
+		counterInt = getFromStorage("cart").length;
+		counter.innerHTML = counterInt;
+	}
+}
+export const changeCounter = function () {
+	recountIt();
+	counter.addEventListener("cartChange", recountIt);
+};
+export const changeUserBtn = function () {
 	const userIcons = document.querySelectorAll(".navigation__iconbtn--signin .fa-layers");
 	let userCheck = !(getUser("jwt") === null);
 	let newTitle = userCheck ? "Open account navigation" : "Sign in";
@@ -30,4 +51,3 @@ const determineUserBtnState = function () {
 
 	//* We do it live as, just using custom events rather than reloading
 };
-export default changeUserBtn;

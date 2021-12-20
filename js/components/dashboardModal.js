@@ -65,7 +65,7 @@ const dashboardModal = function () {
 		//* If invoked by the 'create' button:
 		if (invokerRef === "create") {
 			//* Add title and button text
-			modalTitle.innerHTML = "Create new article";
+			modalTitle.innerHTML = "Create new artworks";
 			modalButton.innerHTML = "Submit";
 			//* Click event on button
 			modalButton.onclick = async function () {

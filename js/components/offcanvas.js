@@ -1,5 +1,6 @@
 import { loginForm } from "./loginForm.js";
 import { canvasLogin, canvasLoggedIn } from "../settings.js";
+import { buildCart, addCartEvents } from "./buildCart.js";
 import { signOut } from "../libs/utilityFunctions.js";
 
 const myOffcanvas = document.querySelector(".offcanvas");
@@ -16,6 +17,7 @@ function addLoginEvents() {
 		canvasTransition(canvasLoggedIn);
 	});
 }
+
 function addLogoutEvents() {
 	const signoutBtn = document.querySelector(".offcanvas__btn--signout");
 	signoutBtn.addEventListener("click", logoutEvent);
@@ -60,6 +62,10 @@ export const adjustOffcanvas = function () {
 		if (invokerRef === "user") {
 			canvasInner.innerHTML = canvasLoggedIn();
 			addLogoutEvents();
+		}
+		if (invokerRef === "cart") {
+			canvasInner.innerHTML = buildCart();
+			addCartEvents();
 		}
 	});
 };

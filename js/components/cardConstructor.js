@@ -1,5 +1,7 @@
 import { apiPropertyKeys } from "../settings.js";
-import { getFromStorage, favouriteHandler } from "../libs/localStorageHelper.js";
+import { storageObjectParse, createThenValidateStorage } from "../libs/storageHelper.js";
+
+import { toggleDisabled } from "../libs/utilityFunctions.js";
 
 const {
 	itemKeyName: titleKey,
@@ -20,27 +22,22 @@ export const buildCardHtml = function (object, featured = false) {
 	let id = object.id;
 	let price = object[`${priceKey}`];
 	let image = imageSorter(object.image_media);
-
-	let favourites = getFromStorage("favourites");
-	let cart = getFromStorage("cart");
-
 	let cardHtml = "";
 
-	//* If the object is in cart, cart button should reflect this.
-	let isInCart = cart.find((savedObject) => savedObject.id === id);
+	//* If the object is found in localStorage, make sure it has the proper styling
+	let isInCart = storageObjectParse({ id: id }, "cart");
+	let isInStorage = storageObjectParse({ id: id }, "favourites");
 
-	let isInStorage = favourites.find((savedObject) => savedObject.id === id);
-
-	//* If the object is found in localStorage, make sure it has the proper visual indicator
+	let inCart = "add-to-cart";
 	let faClass = "far";
 	if (isInCart !== undefined) {
-		inCart = "remove";
+		inCart = "add-to-cart remove-from-cart";
 	}
 	if (isInStorage !== undefined) {
 		faClass = "far fas";
 	}
 
-	if (image.alt === "") image.alt = `${title} by ${creator}`;
+	if (!image.alt) image.alt = `${title} by ${creator}`;
 
 	cardHtml = `
     <article class="col cards__cardwrap">
@@ -63,48 +60,85 @@ export const buildCardHtml = function (object, featured = false) {
                 <h4 class="cards__pricelabel card-subtitle">Current Price</h4>
                 <p class="cards__price">$${price}</p>
             </div>
-            <div class="cards__footer">
+            <div class="cards__footer"  
+                data-id="${id}"
+                data-title="${title}"
+                data-creator="${creator}"
+                data-desc="${description}"
+                data-price="${price}"
+                data-image-url="${image.url}"
+                data-image-alt="${image.alt}"
+                data-image-height="${image.height}"
+                data-image-width="${image.width}"
+                
+            >
                 <button
                     class="cards__favourite button__outlined"
                     aria-label="Save to favourites"
                     data-bs-tooltip="tooltip"
                     data-bs-trigger="hover"
                     data-bs-placement="top"
-                    data-id="${id}"
-                    data-
                     title="Save to favourites"
                 >
                     <i class="${faClass} fa-heart"></i>
                 </button>
-                <button class="button__primary cards__cart ${inCart}">
+                <button data-cards-id="${id}" class="button__primary cards__cart ${inCart}">
                     <span class="fa-layers fa-fw">
                         <i class="far fa-shopping-cart"></i>
                         <span class="far fa-slash"></span>
                     </span>
-                    <span class="cards__btntext">Add To Cart</span>
+                    <span class="cards__btntext">${isInCart ? "Remove" : "Add To Cart"}</span>
                 </button>
             </div>
         </div>
     </article>`;
 	return cardHtml;
 };
-
-export const addFavoriteButtonEvents = function (element) {
-	element.addEventListener("click", () => {
+function toggleButtonState(e) {
+	const counterIcon = document.querySelector(".navigation__counter");
+	let parentContainer = this.parentNode;
+	let objectId = parentContainer.dataset.id;
+	let isInStorage = storageObjectParse({ id: objectId }, "cart");
+	let willBeStored = false;
+	//* If this is true, it will be added to storage.
+	//* If false, it is very soon going to be removed.
+	if (isInStorage === undefined) {
+		willBeStored = true;
+	}
+	counterIcon.dispatchEvent(new CustomEvent("cartChange", { detail: willBeStored })); //? So tell the counter about it.
+	toggleDisabled(this);
+	this.classList.toggle("disabled");
+	//* If object was not already in storage, change button state to 'remove' pre-emptively.
+	//* Otherwise, toggle it back to 'add to cart'
+	this.lastElementChild.innerHTML = willBeStored ? "Remove" : "Add To Cart";
+	//* This ternary is confusingly opposite, but is for whether or not to add/remove class.
+	this.classList[`${willBeStored ? "add" : "remove"}`]("remove-from-cart");
+	createThenValidateStorage(parentContainer, "cart");
+	setTimeout(() => {
+		toggleDisabled(this);
+	}, 200);
+}
+export const addCartButtonEvents = function (element) {
+	element.addEventListener("click", toggleButtonState);
+	element.addEventListener("tossFromCart", toggleButtonState);
+	//* Handling localstorage in same place to avoid headache.
+};
+export const addFavouriteButtonEvents = function (element) {
+	element.addEventListener("click", function (e) {
 		//* Toggle class to change heart's appearence when item is saved
-		element.classList.toggle("fas");
+		let hearts = this.firstElementChild;
+		let parentContainer = element.parentNode;
+		let boolNegate = hearts.dataset.prefix === "fas";
+		hearts.dataset.prefix = boolNegate ? "far" : "fas";
 
 		//* Create object to be added or removed to/from local storage
-		let localStorageObject = {
-			id: element.dataset.id,
-		};
+		createThenValidateStorage(parentContainer);
 		//* Add or remove object to localstorage
-		favouriteHandler(localStorageObject);
 	});
 	//* Making it trigger using the enter key:
-	element.addEventListener("keyup", function (e) {
+	element.onkeyup = function (e) {
 		if (e.keyCode === 13) {
 			element.click();
 		}
-	});
+	};
 };

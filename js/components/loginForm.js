@@ -1,13 +1,8 @@
 import { testEmail, checkInputLength } from "../libs/formValidation.js";
 import { BASE_URL } from "../settings.js";
 import alert from "./alert.js";
-import { getUser } from "./../libs/localStorageHelper.js";
-
-function toggleDisabled() {
-	for (let element of arguments) {
-		element.disabled = !element.disabled; // if false, set to true and vice versa.
-	}
-}
+import { getUser } from "../libs/storageHelper.js";
+import { toggleDisabled } from "../libs/utilityFunctions.js";
 
 function submitBtnState(button, cacheBtn, success = false) {
 	if (success) {
@@ -33,7 +28,6 @@ export const loginForm = function () {
 		const password = document.querySelector('[type="password"]');
 		const alertDiv = document.querySelector(".offcanvas__alert");
 		const submitBtn = document.querySelector(".offcanvas__form .button__primary");
-		console.log(form.email);
 		// To toggle disable on inputs
 		function toggleInputs(cacheBtn) {
 			submitBtnState(submitBtn, cacheBtn);
@@ -50,12 +44,11 @@ export const loginForm = function () {
 						identifier: email.value,
 						password: password.value,
 					});
-					console.log(response);
 					localStorage.setItem("jwt", JSON.stringify(response.data.jwt));
 					localStorage.setItem("user", JSON.stringify(response.data.user));
 					submitBtnState(submitBtn, cacheBtn, true);
 					// Trigger a custom event on success
-					this.dispatchEvent(new CustomEvent("loginSuccess", { bubbles: false, detail: { statusCode: response.status } }));
+					this.dispatchEvent(new CustomEvent("loginSuccess"));
 				} catch (error) {
 					console.error(error);
 					let statusCode = error.response.data.statusCode;

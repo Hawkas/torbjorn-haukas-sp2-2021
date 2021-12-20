@@ -136,7 +136,7 @@
 			<header class="hero" aria-labelledby="hero-title">
 				<div class="custom-shape-divider-bottom-1639521041">
 					<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-						<filter id="inset-shadow">
+						<filter height="116%" width="116%" id="inset-shadow">
 							<!-- Shadow Offset -->
 							<feOffset dx="0" dy="4" />
 
@@ -267,51 +267,14 @@
 			<section class="cards cards--featured">
 				<h2 class="cards__sectiontitle">Featured artworks</h2>
 				<div class="cards__content">
+					<div class="alert--cards"></div>
 					<div class="cards__grid row row-cols-1 row-cols-md-2 row-cols-xxl-3 g-3">
-						<article class="col cards__cardwrap">
-							<div class="card cards__card">
-								<img
-									src="https://hawkas-bucket.s3.eu-north-1.amazonaws.com/medium_futuristicknight_3cb1a6ef35.jpeg"
-									width="750"
-									height="422"
-									alt=""
-									class="card-img-top cards__img img-fluid"
-									loading="lazy"
-								/>
-								<div class="card-body cards__body">
-									<p class="cards__creator card-subtitle">
-										<i class="far fa-user"></i>
-										<span>grandfailure</span>
-									</p>
-									<h3 class="card-title cards__title">Journey's Beginning</h3>
-									<p class="card-text cards__bodytext text-truncate">
-										Ever feel like travelling through a sci-fi portal while on a horse and suited up in combat gear a couple
-										centuries out of fashion? Me too.
-									</p>
-									<h4 class="cards__pricelabel card-subtitle">Current Price</h4>
-									<p class="cards__price">$2500</p>
-								</div>
-								<div class="cards__footer">
-									<button
-										class="cards__favourite button__outlined"
-										aria-label="Save to favourites"
-										data-bs-tooltip="tooltip"
-										data-bs-trigger="hover"
-										data-bs-placement="top"
-										title="Save to favourites"
-									>
-										<i class="far fa-heart"></i>
-									</button>
-									<button class="button__primary cards__cart">
-										<span class="fa-layers fa-fw">
-											<i class="far fa-shopping-cart"></i>
-											<span class="far fa-slash"></span>
-										</span>
-										<span class="cards__btntext">Add To Cart</span>
-									</button>
-								</div>
-							</div>
-						</article>
+						<div class="lds-ring position-absolute top-50 start-50 translate-middle">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
 					</div>
 				</div>
 			</section>

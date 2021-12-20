@@ -2,7 +2,7 @@ import fetchData from "../libs/fetchData.js";
 import { BASE_URL, headers } from "../settings.js";
 import alert from "./alert.js";
 import renderToHtml from "./renderToHtml.js";
-import { favouriteCleanser } from "../libs/localStorageHelper.js";
+import { storageCleanser } from "../libs/storageHelper.js";
 import addSearchFunctionality from "./addSearchFunctionality.js";
 import { emptyApi } from "./staticErrorMessage.js";
 
@@ -13,7 +13,7 @@ const deleteHandler = function () {
 			const id = this.dataset.id;
 			try {
 				let response = await axios.delete(`${BASE_URL}/products/${id}`, headers);
-				favouriteCleanser({ id });
+				storageCleanser({ id });
 				setTimeout(async function () {
 					let productsArray = await fetchData(`${BASE_URL}/products`);
 					try {

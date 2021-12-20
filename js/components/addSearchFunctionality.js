@@ -6,7 +6,7 @@ import { arrowKeyNavigation, hideOnBlur } from "../libs/utilityFunctions.js";
 
 const { itemKeyName, itemKeyAuthor } = apiPropertyKeys;
 const input = document.querySelector(".input-name");
-const form = document.querySelector(".navbar__search");
+const form = document.querySelector(".search");
 const suggestionList = document.querySelector(".suggestions");
 const clearInputButton = document.querySelector("#clear-button");
 
@@ -62,7 +62,6 @@ const addSuggestions = function (array, filterString, dashboardBoolean = false) 
 				suggestionValueArray[0].focus();
 			}
 		});
-
 	} else {
 		suggestionsBoolean = false;
 	}

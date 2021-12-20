@@ -53,3 +53,9 @@ export const signOut = function () {
 	localStorage.removeItem("jwt");
 	console.log(window.location.href);
 };
+
+export const toggleDisabled = function () {
+	for (let element of arguments) {
+		element.disabled = !element.disabled; // if false, set to true and vice versa.
+	}
+};

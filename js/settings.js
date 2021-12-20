@@ -2,7 +2,7 @@
 
 //! Rather than hardcoding these values, I'm just gonna add them here so the code is reusable later on by editing the strings to fit the API being used.
 
-//* I will only be adding property keys I want to access in the api.
+//* I will only be adding top-level property keys I want to access in the api.
 
 const itemKeyName = "title";
 const itemKeyAuthor = "creator";

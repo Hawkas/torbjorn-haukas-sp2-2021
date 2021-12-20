@@ -1,17 +1,8 @@
 import searchArray from "./../libs/searchArray.js";
-import { apiPropertyKeys } from "../settings.js";
-import { favouriteHandler } from "../libs/localStorageHelper.js";
 import deleteHandler from "./deleteHandler.js";
-import { buildCardHtml, addFavoriteButtonEvents } from "./cardConstructor.js";
+import { buildCardHtml, addFavouriteButtonEvents, addCartButtonEvents } from "./cardConstructor.js";
 
-const {
-	itemKeyName: titleKey,
-	itemKeyAuthor: creatorKey,
-	itemKeyContent: descriptionKey,
-	itemKeyPrice: priceKey,
-} = apiPropertyKeys;
-
-function renderToHtml(array, filterString = false, dashboardBoolean = false) {
+function renderToHtml(array, filterString = false, dashboardBoolean = false, featured = false) {
 	try {
 		const cardsContainer = document.querySelector(".cards__grid");
 
@@ -19,15 +10,26 @@ function renderToHtml(array, filterString = false, dashboardBoolean = false) {
 		if (filterString) {
 			array = searchArray(array, filterString);
 		}
+		if (featured) {
+			array.filter(function (object) {
+				if (object.featured === true) {
+					return true;
+				}
+			});
+		}
 		cardsContainer.innerHTML = "";
 		if (array.length >= 1) {
 			for (let object of array) {
 				cardsContainer.innerHTML += buildCardHtml(object, dashboardBoolean);
 			}
 			// Add event listeners to buttons after rendering
-			const icons = document.querySelectorAll(".fa-heart.card__icon");
-			for (let element of icons) {
-				addFavoriteButtonEvents(element);
+			const buttons = document.querySelectorAll(".cards__cart");
+			const icons = document.querySelectorAll(".cards__favourite");
+			for (let button of buttons) {
+				addCartButtonEvents(button);
+			}
+			for (let icon of icons) {
+				addFavouriteButtonEvents(icon);
 			}
 			//* Add handlers for delete buttons if on dashboard
 			if (dashboardBoolean) {
