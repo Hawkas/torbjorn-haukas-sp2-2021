@@ -46,37 +46,50 @@
 			aria-labelledby="staticBackdropLabel"
 			aria-hidden="true"
 		>
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h3 class="modal-title" id="staticBackdropLabel">Create new article</h3>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<div class="alert-modal"></div>
-						<form>
-							<div class="mb-3">
-								<label for="title" class="col-form-label">Title:</label>
-								<input type="text" class="form-control" id="title" />
+						<div class="container-fluid">
+							<div class="alert-modal"></div>
+							<div class="row">
+								<form class="modal__form col">
+									<div class="mb-3">
+										<label for="title" class="col-form-label">Title:</label>
+										<input type="text" class="form-control" id="title" />
+									</div>
+									<div class="mb-3">
+										<label for="creator" class="col-form-label">Creator:</label>
+										<input type="text" class="form-control" id="creator" />
+									</div>
+									<div class="mb-3">
+										<label for="image" class="col-form-label">Image URL:</label>
+										<input type="url" class="form-control" id="image" />
+									</div>
+									<div class="mb-3">
+										<label for="price" class="col-form-label">Price:</label>
+										<input type="number" class="form-control" id="price" />
+									</div>
+									<div class="mb-3">
+										<label for="description" class="col-form-label">Description:</label>
+										<textarea class="form-control" id="description"></textarea>
+									</div>
+									<div class="mb-3 form-check form-switch">
+										<input class="form-check-input" type="checkbox" role="switch" id="featured" />
+										<label class="form-check-label" for="featured">Featured</label>
+									</div>
+								</form>
 							</div>
-							<div class="mb-3">
-								<label for="author" class="col-form-label">Creator:</label>
-								<input type="text" class="form-control" id="author" />
-							</div>
-							<div class="mb-3">
-								<label for="summary" class="col-form-label">Description:</label>
-								<textarea class="form-control" id="summary"></textarea>
-							</div>
-							<
-							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-								<label class="form-check-label" for="flexSwitchCheckDefault">Featured</label>
-							</div>
-						</form>
+						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary btn__modal-submit"></button>
+						<button type="button" class="button__primary button__red button__primary--outline" data-bs-dismiss="modal">
+							Close
+						</button>
+						<button type="button" class="button__primary btn__modal-submit"></button>
 					</div>
 				</div>
 			</div>
@@ -98,7 +111,7 @@
 								<span class="hamburger__inner"></span>
 							</span>
 						</button>
-						<a href="#" class="navigation__logo-linkwrap navbar-brand py-0">
+						<a href="./index.html" class="navigation__logo-linkwrap navbar-brand py-0">
 							<img src="./media/Logo.svg" alt="Ethereal Logo" class="navigation__logo" width="158" height="54" />
 						</a>
 					</div>
@@ -106,7 +119,9 @@
 						<div class="navigation__width-expander collapse navbar-collapse" id="navbarList">
 							<ul class="navbar-nav me-auto mb-lg-0 navigation__navlist">
 								<li class="nav-item navigation__item">
-									<a href="" class="nav-link navigation__link"> <span>Home</span><i class="fal fa-home fa-fw"></i> </a>
+									<a href="./index.html" class="nav-link navigation__link">
+										<span>Home</span><i class="fal fa-home fa-fw"></i>
+									</a>
 								</li>
 								<li class="nav-item navigation__item">
 									<a href="./marketplace.html" class="nav-link navigation__link">
@@ -119,7 +134,15 @@
 									</a>
 								</li>
 								<li class="nav-item navigation__item active super-secret">
-									<a aria-current="page" href="./dashboard.html" class="active nav-link navigation__link">
+									<a
+										aria-current="page"
+										href="./dashboard.html"
+										data-bs-tooltip="tooltip"
+										data-bs-trigger="hover"
+										data-bs-placement="bottom"
+										title="How did you even get in here?"
+										class="active nav-link navigation__link"
+									>
 										<i class="fas fa-question fa-2x" data-fa-transform="grow-6"></i>
 									</a>
 								</li>
@@ -179,15 +202,48 @@
 		<main class="main main--home dashboard position-relative">
 			<section class="cards cards--dashboard">
 				<h1 class="cards__sectiontitle">Admin stuff</h1>
-				<div class="cards__content">
-					<div class="form-floating mb-3">
-						<input type="text" class="form-control search" id="floatingInput" placeholder="Search for art and creators" />
-						<label for="floatingInput">Search for art and creators</label>
+				<div class="toolbar mb-5">
+					<div class="toolbar__content pt-5">
+						<button
+							class="button__primary button__create mb-3"
+							data-bs-target="#staticBackdrop"
+							data-bs-toggle="modal"
+							data-modal="create"
+						>
+							<span>Create</span><i class="fas fa-plus"></i>
+						</button>
+						<form class="search pb-4 position-relative">
+							<div class="input-group w-100">
+								<div class="form-floating flex-grow-1">
+									<input
+										autocomplete="off"
+										aria-expanded="false"
+										aria-autocomplete="list"
+										aria-controls="suggestions-list"
+										type="search"
+										class="rounded-0 rounded-start border-end-0 form-control"
+										id="search-input"
+										placeholder="Search for art and creators"
+									/>
+									<label for="search-input">Search for art and creators</label>
+								</div>
+								<button
+									type="button"
+									data-bs-tooltip="tooltip"
+									data-bs-trigger="hover"
+									data-bs-placement="bottom"
+									title="Clear the input"
+									class="btn btn-outline-secondary"
+									id="clear-button"
+								>
+									<i class="fas fa-times"></i>
+								</button>
+							</div>
+							<ul aria-label="Suggestions" role="listbox" class="suggestions" id="suggestions-list"></ul>
+						</form>
 					</div>
-					<ul class="suggestions"></ul>
-					<button class="button__primary button__create mb-5 mt-3" data-bs-toggle="modal" data-modal="create">
-						<span>Create</span><i class="far fa-plus"></i>
-					</button>
+				</div>
+				<div class="cards__content">
 					<div class="alert--cards"></div>
 					<div class="cards__grid row row-cols-1 row-cols-md-2 row-cols-xxl-3 g-3">
 						<div class="lds-ring position-absolute top-50 start-50 translate-middle">

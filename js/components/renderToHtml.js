@@ -1,18 +1,19 @@
 import searchArray from "./../libs/searchArray.js";
 import deleteHandler from "./deleteHandler.js";
 import { buildCardHtml, addFavouriteButtonEvents, addCartButtonEvents } from "./cardConstructor.js";
+import { initializeTooltips } from "../libs/initializeTooltips.js";
 
-function renderToHtml(array, filterString = false, dashboardBoolean = false, featured = false) {
+function renderToHtml(array, options = {}) {
 	try {
+		const { filterString = false, dashboardBoolean = false, featured = false } = options;
 		const cardsContainer = document.querySelector(".cards__grid");
-
 		//* If called by search inputs, filter the contents of the array
 		if (filterString) {
 			array = searchArray(array, filterString);
 		}
 		if (featured) {
 			array.filter(function (object) {
-				if (object.featured === true) {
+				if (object.featured === "true") {
 					return true;
 				}
 			});
@@ -31,6 +32,7 @@ function renderToHtml(array, filterString = false, dashboardBoolean = false, fea
 			for (let icon of icons) {
 				addFavouriteButtonEvents(icon);
 			}
+			initializeTooltips(); // So tooltips on cards will render
 			//* Add handlers for delete buttons if on dashboard
 			if (dashboardBoolean) {
 				deleteHandler();

@@ -1,23 +1,24 @@
-import fetchData from "./libs/fetchData.js";
+import fetchData from "./libs/api-functions/fetchData.js";
 import renderToHtml from "./components/renderToHtml.js";
 import addSearchFunctionality from "./components/addSearchFunctionality.js";
 import dashboardModal from "./components/dashboardModal.js";
 import { apiError, emptyApi } from "./components/staticErrorMessage.js";
-import { BASE_URL } from "./settings.js";
 import adjustInterface from "./components/adjustInterface.js";
+import dataCache from "./libs/api-functions/dataCache.js";
 
 adjustInterface();
 
 try {
-	let productsArray = await fetchData(`${BASE_URL}/products`);
+	const productsArray = await dataCache();
 	dashboardModal();
 	try {
-		renderToHtml(productsArray, false, true);
+		renderToHtml(productsArray, { dashboardBoolean: true });
 		// Add functionality for search inputs and suggestions list
-		addSearchFunctionality(productsArray);
+		addSearchFunctionality(productsArray, { dashboardBoolean: true });
 		// Render all items in API call to DOM and add handlers
 	} catch (error) {
-		emptyApi();
+		console.error(error);
+		emptyApi(); // If this error message is thrown, it's a problem
 	}
 } catch (error) {
 	console.error(error);

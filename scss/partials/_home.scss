@@ -53,7 +53,6 @@
 		height: auto;
 		@include fluid-type(width, 360px, 1440px, 283px, 452px);
 		--svgsize: calc(283px + 169 * (100vw - 360px) / 1080);
-		// move out of bounds by svg width, add offset value
 
 		&--left {
 			@include svg-pos(left);
@@ -85,7 +84,7 @@
 	}
 	&__title {
 		text-transform: uppercase;
-		@include display-fonts(100%, $bigtitle, 1.4px, 800);
+		@include display-fonts(100%, 1.4px, $bigtitle, 800);
 		span {
 			display: block;
 		}
@@ -94,7 +93,7 @@
 				top: 10px;
 				bottom: 6px;
 			}
-			@include display-fonts(125%, $sectiontitle, 1.4px, 700);
+			@include display-fonts(125%, 1.4px, $sectiontitle, 700);
 		}
 	}
 
@@ -130,7 +129,7 @@
 	}
 	&__title {
 		text-align: center;
-		@include display-fonts(100%, $sectiontitle, 1.4px, 800);
+		@include display-fonts(100%, 1.4px, $sectiontitle, 800);
 		text-transform: uppercase;
 		@include fluid-type(margin-bottom, 360px, 768px, 50px, 100px);
 	}
@@ -206,7 +205,7 @@
 	}
 	&__cardtitle {
 		margin-bottom: 32px;
-		@include display-fonts(100%, $elementtitle, 0, 700);
+		@include display-fonts(100%, 0, $elementtitle, 700);
 	}
 	&__text {
 		@extend .hero__bodytext;

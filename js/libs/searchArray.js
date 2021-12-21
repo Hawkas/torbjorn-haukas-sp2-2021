@@ -1,5 +1,5 @@
 import { apiPropertyKeys } from "./../settings.js";
-import { equalizeString } from "./utilityFunctions.js";
+import { equalizeString } from "./utilities.js";
 const { itemKeyName, itemKeyAuthor } = apiPropertyKeys;
 
 function filterArray(array, key, filterString) {

@@ -7,11 +7,11 @@
 const itemKeyName = "title";
 const itemKeyAuthor = "creator";
 const itemKeyContent = "description";
-// const itemKeyPublished = "";
-// const itemKeyCategory = "";
+const itemKeyFeatured = "featured";
+const itemKeyImage = "image__media";
 const itemKeyPrice = "price";
 
-export const apiPropertyKeys = { itemKeyName, itemKeyAuthor, itemKeyContent, itemKeyPrice };
+export const apiPropertyKeys = { itemKeyName, itemKeyAuthor, itemKeyContent, itemKeyPrice, itemKeyImage, itemKeyFeatured };
 
 export const BASE_URL = "https://ethereal-strapi.herokuapp.com";
 

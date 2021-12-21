@@ -46,7 +46,8 @@
 		label::-moz-selection {
 			background-color: transparent;
 		}
-		input {
+		input,
+		textarea {
 			@include primary-fonts();
 			font-size: $bodytext;
 			font-weight: 500;

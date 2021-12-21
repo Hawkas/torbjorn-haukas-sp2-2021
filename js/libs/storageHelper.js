@@ -1,10 +1,10 @@
 //* I wanted to use sessionStorage as a compromise to minimize API load. Don't have time to implement :(
 
-export const saveToStorage = function (keyName, object) {
+export const saveToLocal = function (keyName, object) {
 	localStorage.setItem(keyName, JSON.stringify(object));
 };
 
-export const getFromStorage = function (keyName) {
+export const getFromLocal = function (keyName) {
 	if (localStorage.getItem(keyName) !== null) {
 		return JSON.parse(localStorage.getItem(keyName));
 	} else return [];
@@ -17,21 +17,37 @@ export const getFromSession = function (keyName) {
 		return JSON.parse(sessionStorage.getItem(keyName));
 	} else return [];
 };
-export const storageObjectParse = function (localStorageObject, keyName) {
-	let storageArray = getFromStorage(keyName);
+export const localStorageParse = function (localStorageObject, keyName) {
+	let storageArray = getFromLocal(keyName);
 	return storageArray.find((object) => object.id === localStorageObject.id);
 };
+export const sessionStorageParse = function (sessionStorageObject, keyName) {
+	let storageArray = getFromSession(keyName);
+	return storageArray.find((object) => object.id === sessionStorageObject.id);
+};
 //* Add to storage if it doesn't exist already, else remove.
-export const storageAddOrRemove = function (localStorageObject, keyName = "favourites") {
-	let storageArray = getFromStorage(keyName);
-	let isInStorage = storageObjectParse(localStorageObject, keyName);
+export const localAddOrRemove = function (localStorageObject, keyName = "favourites") {
+	let storageArray = getFromLocal(keyName);
+	let isInStorage = localStorageParse(localStorageObject, keyName);
 
 	if (isInStorage === undefined) {
 		storageArray.push(localStorageObject);
-		saveToStorage(keyName, storageArray);
+		saveToLocal(keyName, storageArray);
 	} else {
 		let removedElementArray = storageArray.filter((object) => object.id !== localStorageObject.id);
-		saveToStorage(keyName, removedElementArray);
+		saveToLocal(keyName, removedElementArray);
+	}
+};
+export const sessionAddOrRemove = function (sessionStorageObject, keyName = "strapi-data") {
+	let storageArray = getFromSession(keyName);
+	let isInStorage = sessionStorageParse(sessionStorageObject, keyName);
+
+	if (isInStorage === undefined) {
+		storageArray.push(sessionStorageObject);
+		saveToSession(keyName, storageArray);
+	} else {
+		let removedElementArray = storageArray.filter((object) => object.id !== sessionStorageObject.id);
+		saveToSession(keyName, removedElementArray);
 	}
 };
 
@@ -47,11 +63,11 @@ export const filterFromStorage = function (array, localStorageArray) {
 //* To remove products from favourites when they are deleted from the API
 export const storageCleanser = function (localStorageObject) {
 	for (let keyName of ["favourites", "cart"]) {
-		let localStorageArray = getFromStorage(keyName);
-		let isInStorage = storageObjectParse(localStorageObject, keyName);
+		let localStorageArray = getFromLocal(keyName);
+		let isInStorage = localStorageParse(localStorageObject, keyName);
 		if (isInStorage !== undefined) {
 			let removedElementArray = localStorageArray.filter((object) => object.id !== localStorageObject.id);
-			saveToStorage(keyName, removedElementArray);
+			saveToLocal(keyName, removedElementArray);
 		}
 	}
 };
@@ -75,7 +91,7 @@ export const getUser = function (userKey) {
 
 //* Create a localstorage object
 
-export const createThenValidateStorage = function (datasetContainer, keyName = "favourites") {
+export const createStorageObject = function (datasetContainer) {
 	let localStorageObject = {
 		id: datasetContainer.dataset.id,
 		title: datasetContainer.dataset.title,
@@ -89,5 +105,5 @@ export const createThenValidateStorage = function (datasetContainer, keyName = "
 			width: datasetContainer.dataset.imageWidth,
 		},
 	};
-	storageAddOrRemove(localStorageObject, keyName);
+	return localStorageObject;
 };

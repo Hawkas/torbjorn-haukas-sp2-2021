@@ -1,4 +1,4 @@
-import fetchData from "../libs/fetchData.js";
+import fetchData from "../libs/api-functions/fetchData.js";
 import { BASE_URL, headers } from "../settings.js";
 import alert from "./alert.js";
 import renderToHtml from "./renderToHtml.js";

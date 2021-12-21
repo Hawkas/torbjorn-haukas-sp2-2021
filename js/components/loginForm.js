@@ -2,7 +2,7 @@ import { testEmail, checkInputLength } from "../libs/formValidation.js";
 import { BASE_URL } from "../settings.js";
 import alert from "./alert.js";
 import { getUser } from "../libs/storageHelper.js";
-import { toggleDisabled } from "../libs/utilityFunctions.js";
+import { toggleDisabled } from "../libs/utilities.js";
 
 function submitBtnState(button, cacheBtn, success = false) {
 	if (success) {

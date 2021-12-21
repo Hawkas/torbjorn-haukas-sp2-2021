@@ -1,5 +1,5 @@
-import fetchData from "./libs/fetchData.js";
-import { getFromStorage, filterFromFavourites, removeKeyFromStorage } from "./libs/localStorageHelper.js";
+import fetchData from "./libs/api-functions/fetchData.js";
+import { getFromLocal, filterFromFavourites, removeKeyFromStorage } from "./libs/localStorageHelper.js";
 import renderToHtml from "./components/renderToHtml.js";
 import { BASE_URL } from "./settings.js";
 import adjustMenu from "./components/adjustMenu.js";
@@ -11,7 +11,7 @@ const clearAllButton = document.querySelector(".btn__clear-storage");
 
 function renderProducts(objectArray) {
 	//* Get favourites array from localstorage, and filter the array from the API with it
-	let favouritesArray = getFromStorage("favourites");
+	let favouritesArray = getFromLocal("favourites");
 	let filteredArray = filterFromFavourites(objectArray, favouritesArray);
 
 	try {

@@ -40,12 +40,12 @@
 	font-weight: $fontweight;
 }
 
-@mixin display-fonts($lineheight: 100%, $fontsize: $sectiontitle, $letterspacing: 0.05em, $fontweight: $bold) {
+@mixin display-fonts($lineheight: 100%, $letterspacing: 0.05em, $fontsize: $sectiontitle, $fontweight: $bold) {
 	font-family: $display-font;
 	line-height: $lineheight;
 	letter-spacing: $letterspacing;
 	font-weight: $fontweight;
-	@include fluid-type(font-size, 320px, 768px, $fontsize * 0.75, $fontsize);
+	@include fluid-type(font-size, 320px, 768px, #{$fontsize * 0.75}, $fontsize);
 }
 
 // Generate media queries for layout width placeholder

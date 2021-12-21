@@ -1,47 +1,63 @@
-import { getFromStorage, removeKeyFromStorage, storageAddOrRemove } from "../libs/storageHelper.js";
+import { getFromLocal, removeKeyFromStorage, localAddOrRemove } from "../libs/storageHelper.js";
 
 function reCalcTotal(e) {
-	const deductAmount = parseInt(e.detail.change);
-	console.log(deductAmount);
-	let current = parseInt(this.innerHTML);
+	const deductAmount = e.detail.change;
+	let current = parseInt(this.innerHTML.slice(1));
 	let newValue = current - deductAmount;
-	if (isNaN(newValue)) newValue = "0";
-	this.innerHTML = "$" + newValue;
-}
-export function addCartEvents() {
-	if (getFromStorage("cart").length >= 1) {
-		const totalPrice = document.querySelector(".cart__total");
-		const removeBtns = document.querySelectorAll(".cart__trash");
-		const clearBtn = document.querySelector(".cart__clearall");
+	console.log(newValue);
+	this.innerHTML = `$${newValue}`;
+	if (newValue < 1 || isNaN(newValue)) {
+		setTimeout(() => {
+			this.dispatchEvent(new CustomEvent("emptyCart", { bubbles: true }));
+		}, 200);
 
-		totalPrice.addEventListener("priceChange", reCalcTotal); // Custom event for price change.
-
-		for (let button of removeBtns) {
-			button.addEventListener("click", function (e) {
-				//* Send price value to deduct out to listener
-				let price = this.dataset.price;
-				totalPrice.dispatchEvent(
-					new CustomEvent("priceChange", {
-						detail: {
-							change: parseInt(price),
-						},
-					})
-				);
-				//* Find and remove product from rendered cart and localStorage, using id.
-				let localStorageObject = this.dataset.id;
-				let productToRemove = document.querySelector(`[data-cart-id="${localStorageObject}"`);
-				const cardBtn = document.querySelector(`[data-cards-id="${localStorageObject}"]`);
-				cardBtn.dispatchEvent(new CustomEvent("tossFromCart"));
-				setTimeout(() => {
-					if (productToRemove.parentNode) {
-						productToRemove.parentNode.removeChild(productToRemove);
-					}
-				}, 200);
-			});
-		}
+		// I'm just bubbling this up to the top to remake the cart
+		// Timeout to give time for session storage to clear.
 	}
 }
-export function buildCart() {
+export const addCartEvents = function () {
+	if (document.querySelector(".navigation__iconbtn--cart")) {
+		if (getFromLocal("cart").length >= 1) {
+			const totalPrice = document.querySelector(".cart__total");
+			const removeBtns = document.querySelectorAll(".cart__trash");
+
+			totalPrice.addEventListener("priceChange", reCalcTotal); // Custom event for price change.
+
+			for (let button of removeBtns) {
+				button.addEventListener("click", function (e) {
+					//* Send price value to deduct out to listener
+					let price = this.dataset.price;
+					totalPrice.dispatchEvent(
+						new CustomEvent("priceChange", {
+							detail: {
+								change: parseInt(price),
+							},
+						})
+					);
+					//* Find and remove product from rendered cart and localStorage, using id.
+					let productId = this.dataset.id;
+					let productToRemove = document.querySelector(`[data-cart-id="${productId}"`);
+					const cardBtn = document.querySelector(`[data-cards-btn-id="${productId}"]`);
+					if (cardBtn) {
+						cardBtn.dispatchEvent(new CustomEvent("tossFromCart"));
+						//* ^^This event will purge from localstorage and alter button state.
+						//? Ideally I want to remove from the same place that added it.
+					} else {
+						//? Unless the button on the cards is gone, i.e the dashboard.
+						localAddOrRemove({ id: productId }, "cart");
+					}
+
+					setTimeout(() => {
+						if (productToRemove.parentNode) {
+							productToRemove.parentNode.removeChild(productToRemove);
+						}
+					}, 200);
+				});
+			}
+		}
+	}
+};
+export const buildCart = function () {
 	let cartHtml = `
                 <header class="offcanvas-header">
 					<button type="button" class="offcanvas__close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
@@ -53,7 +69,7 @@ export function buildCart() {
 					<h2 class="offcanvas-title" id="offcanvasLabel">Cart</h2>
 				</header>`;
 
-	let cartProducts = getFromStorage("cart");
+	let cartProducts = getFromLocal("cart");
 	if (cartProducts.length >= 1) {
 		let cartTotal = 0;
 		cartHtml += `<div class="offcanvas-body">
@@ -102,4 +118,4 @@ export function buildCart() {
         </div>`;
 	}
 	return cartHtml;
-}
+};

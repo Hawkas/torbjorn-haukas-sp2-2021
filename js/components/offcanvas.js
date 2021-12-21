@@ -1,19 +1,18 @@
 import { loginForm } from "./loginForm.js";
 import { canvasLogin, canvasLoggedIn } from "../settings.js";
 import { buildCart, addCartEvents } from "./buildCart.js";
-import { signOut } from "../libs/utilityFunctions.js";
+import { signOut } from "../libs/utilities.js";
 
 const myOffcanvas = document.querySelector(".offcanvas");
 const canvasInner = document.querySelector(".offcanvas__inner");
-
+const userButton = document.querySelector(".navigation__iconbtn--signin");
 const bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
 
 function addLoginEvents() {
-	const userButton = document.querySelector(".navigation__iconbtn--signin");
 	loginForm();
 	document.querySelector(".offcanvas__form").addEventListener("loginSuccess", function (e) {
 		// Change appearance and data on user icon btn in nav by dispatching event.
-		userButton.dispatchEvent(new CustomEvent("signedChange", { bubbles: false }));
+		userButton.dispatchEvent(new CustomEvent("signedChange"));
 		canvasTransition(canvasLoggedIn);
 	});
 }
@@ -26,6 +25,8 @@ function logoutEvent(e) {
 	e.preventDefault();
 	this.disabled = true;
 	signOut();
+	userButton.dispatchEvent(new CustomEvent("signedChange"));
+
 	canvasTransition(canvasLogin);
 }
 
@@ -49,6 +50,10 @@ function canvasTransition(newCanvas) {
 		}
 	}, 1100);
 }
+function cartIsEmpty() {
+	canvasInner.innerHTML = buildCart();
+	addCartEvents();
+}
 
 export const adjustOffcanvas = function () {
 	myOffcanvas.addEventListener("show.bs.offcanvas", function (e) {
@@ -66,6 +71,7 @@ export const adjustOffcanvas = function () {
 		if (invokerRef === "cart") {
 			canvasInner.innerHTML = buildCart();
 			addCartEvents();
+			canvasInner.addEventListener("emptyCart", cartIsEmpty, { once: true });
 		}
 	});
 };

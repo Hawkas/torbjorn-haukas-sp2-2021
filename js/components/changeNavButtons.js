@@ -1,11 +1,11 @@
 //** Adjusting for direct interactions with the navigation contents, and conditional changes to buttons.
-import { getUser, getFromStorage } from "../libs/storageHelper.js";
+import { getUser, getFromLocal } from "../libs/storageHelper.js";
 
 const userButton = document.querySelector(".navigation__iconbtn--signin");
 const counter = document.querySelector(".navigation__counter");
 
 function recountIt(e) {
-	let counterInt = getFromStorage("cart").length;
+	let counterInt = getFromLocal("cart").length;
 	if (e) {
 		counter.classList.toggle("changing");
 		if (e.detail) {
@@ -16,13 +16,15 @@ function recountIt(e) {
 			this.classList.toggle("changing");
 		}, 500);
 	} else {
-		counterInt = getFromStorage("cart").length;
+		counterInt = getFromLocal("cart").length;
 		counter.innerHTML = counterInt;
 	}
 }
 export const changeCounter = function () {
-	recountIt();
-	counter.addEventListener("cartChange", recountIt);
+	if (counter) {
+		recountIt();
+		counter.addEventListener("cartChange", recountIt);
+	}
 };
 export const changeUserBtn = function () {
 	const userIcons = document.querySelectorAll(".navigation__iconbtn--signin .fa-layers");
@@ -43,11 +45,7 @@ export const changeUserBtn = function () {
 			icon.classList[`${userCheck ? "remove" : "add"}`]("hide");
 		}
 	}
-};
-const determineUserBtnState = function () {
-	changeUserBtn();
-	userButton.addEventListener("signedChange", changeUserBtn);
-	window.onstorage = changeUserBtn(); // Supposedly only works on 'other' pages on the domain.. but it invokes when something is removed?
 
-	//* We do it live as, just using custom events rather than reloading
+	userButton.addEventListener("signedChange", changeUserBtn);
+	//* We do it live when logging in/out too, just using custom events rather than reloading
 };
