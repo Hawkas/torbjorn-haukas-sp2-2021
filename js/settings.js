@@ -78,20 +78,3 @@ export const canvasLoggedIn = function (fadeIn = "") {
 		</nav>
 	</div>`;
 };
-export const dashboardToast = `
-			<div class="toast border-0 rounded-0 text-white" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-				<div class="toast-header rounded-0">
-					<p class="text-uppercase">A quick headsup</p>
-					<button class="ms-auto" type="button" data-bs-dismiss="toast" aria-label="Close">
-						<i class="text-white fal fa-times"></i>
-					</button>
-				</div>
-					<div class="toast-body">
-						<p>You should know that my API is not ephemeral. I set it up with a free BaaS, so if you delete a 'product' in there, it'll be gone for good.</p>
-						<p>Backups are a paid service soo..</p>
-						<p>Please create a new product before deleting something</p>
-						<br/>
-						<p>Cheers<p>
-					</div>
-					
-			</div>`;

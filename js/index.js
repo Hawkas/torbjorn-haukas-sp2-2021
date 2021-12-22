@@ -1,5 +1,5 @@
 import renderToHtml from "./components/renderToHtml.js";
-import adjustInterface from "./components/adjustInterface.js";
+import adjustInterface from "./components/navigation/adjustInterface.js";
 import { apiError, emptyApi } from "./components/staticErrorMessage.js";
 import dataCache from "./libs/api-functions/dataCache.js";
 

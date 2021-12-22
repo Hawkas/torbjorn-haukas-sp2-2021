@@ -31,7 +31,8 @@ export async function prepImageForUpload(imageUrl, internalImageName) {
 	//* This is overkill I figure, and I did spend hours trying to figure this out.
 	//* I'd rather not have my page link to external URLs is all.
 	try {
-		const response = await axios.get(imageUrl, { responseType: "blob" });
+		const cors = "https://noroffcors.herokuapp.com/";
+		const response = await axios.get(cors + imageUrl, { responseType: "blob" });
 		const mimeType = response.headers["content-type"];
 		const imageFile = new File([response.data], internalImageName, { type: mimeType });
 		const formData = new FormData();

@@ -1,33 +1,37 @@
-.toolbar {
-	position: relative;
-	z-index: 10;
-	background-color: $surface-variant;
-	border: {
-		top: 1px solid rgba($on-surface, 0.1);
-		bottom: 1px solid rgba($on-surface, 0.1);
+.main--product {
+	background-image: $hero-gradient;
+	height: 900px;
+}
+.product {
+	padding-top: 100px;
+	padding-bottom: 150px;
+	&__pricelabel {
+		@extend .cards__pricelabel;
+		margin-bottom: 0;
+		margin-top: auto;
 	}
-	.suggestions {
-		position: absolute;
-		display: none;
-		left: 0;
-		right: 0;
-		list-style: none;
-
-		padding-left: 0;
-		&.shown {
-			display: block;
+	&__price {
+		margin-right: auto;
+		margin-bottom: 0;
+		@include primary-fonts(150%, 0.1px, $cardtitle, $bold);
+	}
+	&__body {
+		margin-bottom: auto;
+	}
+	&__contentwrap {
+		display: flex;
+		flex-flow: column;
+	}
+	&__footer {
+		display: flex;
+		justify-content: flex-end;
+		align-items: flex-end;
+		& .button__primary {
+			max-height: 40px;
+			max-width: 200px;
 		}
-		&__value {
-			cursor: pointer;
-			background-color: rgba($color: $black, $alpha: 0.9);
-			padding: 14px 14px;
-			padding-left: 14px;
-			padding-top: 14px;
-			@include primary-fonts(150%, 0.06em, $bodytext);
-			&:hover,
-			&:focus {
-				background-color: rgba($color: $primary-shade4, $alpha: 0.9);
-			}
+		& .cards__favourite {
+			margin-right: 10px;
 		}
 	}
 }

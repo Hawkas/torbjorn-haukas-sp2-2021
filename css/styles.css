@@ -12504,7 +12504,8 @@ body {
 .info__content,
 .footer__content,
 .cards__content,
-.toolbar__content, .cards__sectiontitle {
+.toolbar__content,
+.product__content, .cards__sectiontitle {
   width: auto;
   margin-left: 10px;
   margin-right: 10px;
@@ -12515,7 +12516,8 @@ body {
   .info__content,
   .footer__content,
   .cards__content,
-  .toolbar__content, .cards__sectiontitle {
+  .toolbar__content,
+  .product__content, .cards__sectiontitle {
     width: auto;
     margin-left: 32px;
     margin-right: 32px;
@@ -12527,7 +12529,8 @@ body {
   .info__content,
   .footer__content,
   .cards__content,
-  .toolbar__content, .cards__sectiontitle {
+  .toolbar__content,
+  .product__content, .cards__sectiontitle {
     width: 840px;
     margin-left: auto;
     margin-right: auto;
@@ -12539,7 +12542,8 @@ body {
   .info__content,
   .footer__content,
   .cards__content,
-  .toolbar__content, .cards__sectiontitle {
+  .toolbar__content,
+  .product__content, .cards__sectiontitle {
     width: auto;
     margin-left: 100px;
     margin-right: 100px;
@@ -12551,7 +12555,8 @@ body {
   .info__content,
   .footer__content,
   .cards__content,
-  .toolbar__content, .cards__sectiontitle {
+  .toolbar__content,
+  .product__content, .cards__sectiontitle {
     width: auto;
     margin-left: 156px;
     margin-right: 156px;
@@ -12563,7 +12568,8 @@ body {
   .info__content,
   .footer__content,
   .cards__content,
-  .toolbar__content, .cards__sectiontitle {
+  .toolbar__content,
+  .product__content, .cards__sectiontitle {
     width: 1126px;
     margin-left: auto;
     margin-right: auto;
@@ -12575,7 +12581,8 @@ body {
   .info__content,
   .footer__content,
   .cards__content,
-  .toolbar__content, .cards__sectiontitle {
+  .toolbar__content,
+  .product__content, .cards__sectiontitle {
     width: 1368px;
     margin-left: auto;
     margin-right: auto;
@@ -12590,7 +12597,8 @@ body {
 .info,
 .footer,
 .cards,
-.toolbar {
+.toolbar,
+.product {
   width: 100%;
 }
 
@@ -12703,19 +12711,19 @@ button:focus-visible,
   display: none;
 }
 
-.button__primary.remove-from-cart, .button__primary.cards__delete {
+.button__primary.remove-from-cart, .button__primary.cards__delete, .button__primary.button__red {
   background-color: #cd4a47;
   color: white;
   -webkit-transition: 0.25s ease-in-out;
   transition: 0.25s ease-in-out;
 }
 
-.button__primary.remove-from-cart:hover, .button__primary.remove-from-cart:focus, .button__primary.cards__delete:hover, .button__primary.cards__delete:focus {
-  background-color: rgba(205, 74, 71, 0.6);
+.button__primary.remove-from-cart:not(:disabled):hover, .button__primary.remove-from-cart:not(:disabled):focus, .button__primary.cards__delete:not(:disabled):hover, .button__primary.cards__delete:not(:disabled):focus, .button__primary.button__red:not(:disabled):hover, .button__primary.button__red:not(:disabled):focus {
+  background-color: rgba(205, 74, 71, 0.8);
   color: white;
 }
 
-.button__primary.remove-from-cart .fa-slash, .button__primary.cards__delete .fa-slash {
+.button__primary.remove-from-cart .fa-slash, .button__primary.cards__delete .fa-slash, .button__primary.button__red .fa-slash {
   display: block;
 }
 
@@ -13442,6 +13450,9 @@ button,
 }
 
 .cards__card {
+  min-height: 519px;
+  max-height: 519px;
+  color: white;
   border-radius: 0;
   padding: 15px;
   border: 2px solid rgba(222, 247, 252, 0.32);
@@ -13452,10 +13463,21 @@ button,
   transition: 0.25s ease;
 }
 
+@media only screen and (min-width: 1680px) {
+  .cards__card {
+    min-height: 0;
+    max-height: 100%;
+  }
+}
+
 .cards__card:not(.card__dashboard):hover {
   border: 2px solid rgba(222, 247, 252, 0.6);
   -webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
           box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15), 0px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.cards__card:hover {
+  color: white;
 }
 
 .cards__imgwrap {
@@ -13464,6 +13486,12 @@ button,
   max-height: 230px;
   width: 100%;
   margin-bottom: 18px;
+}
+
+@media only screen and (min-width: 1400px) {
+  .cards__imgwrap {
+    max-height: 230px;
+  }
 }
 
 .cards__img {
@@ -13475,6 +13503,13 @@ button,
   width: 100%;
   height: auto;
   border-radius: 0;
+}
+
+@media only screen and (min-width: 1400px) {
+  .cards__img {
+    min-height: 200px;
+    max-height: 200px;
+  }
 }
 
 .cards__body {
@@ -13523,7 +13558,7 @@ button,
   margin-bottom: 16px;
 }
 
-.cards__creator, .cards__pricelabel {
+.cards__creator, .cards__pricelabel, .product__pricelabel {
   margin-top: 0;
   color: #babbc0;
   font-family: "Red Hat Display", sans-serif;
@@ -14411,6 +14446,86 @@ button,
 
 .toolbar .suggestions__value:hover, .toolbar .suggestions__value:focus {
   background-color: rgba(39, 133, 106, 0.9);
+}
+
+.cards--dashboard {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(-11.39%, rgba(28, 31, 45, 0)), to(rgba(79, 250, 202, 0.1)));
+  background-image: linear-gradient(180deg, rgba(28, 31, 45, 0) -11.39%, rgba(79, 250, 202, 0.1) 100%);
+}
+
+.cards__sectiontitle--shop {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(-11.39%, rgba(28, 31, 45, 0)), to(rgba(79, 250, 202, 0.1)));
+  background-image: linear-gradient(180deg, rgba(28, 31, 45, 0) -11.39%, rgba(79, 250, 202, 0.1) 100%);
+}
+
+.cards--shop {
+  padding-top: 0;
+}
+
+.main--product {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(-11.39%, rgba(28, 31, 45, 0)), to(rgba(79, 250, 202, 0.1)));
+  background-image: linear-gradient(180deg, rgba(28, 31, 45, 0) -11.39%, rgba(79, 250, 202, 0.1) 100%);
+  height: 900px;
+}
+
+.product {
+  padding-top: 100px;
+  padding-bottom: 150px;
+}
+
+.product__pricelabel {
+  margin-bottom: 0;
+  margin-top: auto;
+}
+
+.product__price {
+  margin-right: auto;
+  margin-bottom: 0;
+  font-family: "Red Hat Display", sans-serif;
+  line-height: 150%;
+  letter-spacing: 0.1px;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.product__body {
+  margin-bottom: auto;
+}
+
+.product__contentwrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+}
+
+.product__footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.product__footer .button__primary {
+  max-height: 40px;
+  max-width: 200px;
+}
+
+.product__footer .cards__favourite {
+  margin-right: 10px;
 }
 
 .modal-dialog > * {

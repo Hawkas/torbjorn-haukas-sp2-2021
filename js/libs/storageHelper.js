@@ -52,7 +52,7 @@ export const sessionAddOrRemove = function (sessionStorageObject, keyName = "str
 };
 
 //* Rather than build the array from data saved client-side, I filter the array fetched from the API so any changes done to the API will be reflected.
-export const filterFromStorage = function (array, localStorageArray) {
+export const filterFromFavourites = function (array, localStorageArray) {
 	return array.filter(function (object) {
 		//* If object exists in localstorage, return true. Otherwise, remove it
 		let isInStorage = localStorageArray.find((storageObject) => storageObject.id === object.id);
@@ -72,11 +72,11 @@ export const storageCleanser = function (localStorageObject) {
 	}
 };
 export const sessionCleanser = function (storageObject) {
-	let everything = getFromSession("everything");
+	let everything = getFromSession("strapi-data");
 	let isInStorage = everything.find((object) => object.id === storageObject.id);
 	if (isInStorage !== undefined) {
-		let removedElementArray = everything.filter((object) => object.id !== localStorageObject.id);
-		saveToSession("everything", removedElementArray);
+		let removedElementArray = everything.filter((object) => object.id !== storageObject.id);
+		saveToSession("strapi-data", removedElementArray);
 	}
 };
 export const removeKeyFromStorage = function (keyName) {

@@ -68,7 +68,6 @@ export const validateWithFeedback = function (inputs = {}) {
 						formData.append("data", JSON.stringify(data));
 						data = formData;
 					}
-					console.log(data);
 					return data;
 				}
 

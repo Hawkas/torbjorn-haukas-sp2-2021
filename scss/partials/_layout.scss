@@ -40,7 +40,8 @@ body {
 .info,
 .footer,
 .cards,
-.toolbar {
+.toolbar,
+.product {
 	width: 100%;
 	&__content {
 		@extend %layoutwidth;

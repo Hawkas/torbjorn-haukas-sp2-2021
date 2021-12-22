@@ -11,11 +11,48 @@ const suggestionList = document.querySelector(".suggestions");
 const clearInputButton = document.querySelector("#clear-button");
 
 //* Cheap band-aid to avoid duplicate listeners when reloading after adding/deleting/editing products
-let dejavuChecker = false;
 
 //* To confirm whether or not suggestion list has content
 let suggestionsBoolean = false;
 
+function moveLeftOrEnter(e) {
+	//* Invoke click event when pressing enter
+	if (e.keyCode === 13) {
+		this.click();
+	}
+	//* Left arrow key
+	if (e.keyCode === 37) {
+		input.focus();
+	}
+}
+
+function moveRightToButton(e) {
+	if (e.keyCode === 39) {
+		clearInputButton.focus();
+	}
+}
+
+function handleInput() {
+	//* Render matching cards to the DOM
+	let filterString = input.value;
+	try {
+		renderToHtml(this.objectArray, { filterString, dashboardBoolean: this.dashboardBoolean });
+	} catch (error) {
+		noResults();
+	}
+	//* Add matching items to suggestions list
+	addSuggestions(this.objectArray, { filterString, dashboardBoolean: this.dashboardBoolean });
+}
+
+function handleFocus() {
+	addSuggestions(this.objectArray, { filterString: input.value, dashboardBoolean: this.dashboardBoolean });
+	suggestionList.classList.add("shown");
+	input.ariaExpanded = true;
+	suggestionList.tabIndex = 0;
+}
+function blurHandler() {
+	hideOnBlur(form, suggestionList);
+}
 export const hideOnBlur = function (parentContainer, elementToHide) {
 	//* On blur, hide the suggestions dropdown unless anything inside the 'form' element is in focus/being navigated with keyboard
 	//? setTimeout is needed in order for click event on suggestions to auto-fill input before suggestion list disappears.
@@ -53,13 +90,11 @@ const addSuggestions = function (array, options = {}) {
 		for (let suggestionValue of suggestionValueArray) {
 			suggestionValue.addEventListener("click", () => {
 				let suggestionString = suggestionValue.dataset.name;
-
-				input.value = suggestionString; //* Change inputs value to the selected option
-				addSuggestions(array, { filterString: suggestionString, dashboardBoolean });
-				//* Then immediately render the search results
-				renderToHtml(array, { filterString: suggestionString, dashboardBoolean });
-				//* And hide the suggestions list.
+				//* Change inputs value to the selected option
+				input.value = suggestionString;
+				input.dispatchEvent(new Event("input", { bubbles: false }));
 				input.ariaExpanded = false;
+				//* And hide the suggestions list preemptively.
 				suggestionList.classList.remove("shown");
 			});
 
@@ -85,18 +120,12 @@ const addSuggestions = function (array, options = {}) {
 	}
 };
 
-function rebuildToAvoidDuplicateListeners(element) {
-	let newEl = element.cloneNode(false);
-	while (element.hasChildNodes()) newEl.appendChild(element.firstChild);
-	element.parentNode.replaceChild(newEl, element);
-}
-
 function addSearchFunctionality(objectArray, options = {}) {
 	const { dashboardBoolean = false } = options;
-	if (dejavuChecker) {
-		rebuildToAvoidDuplicateListeners(clearInputButton);
-		rebuildToAvoidDuplicateListeners(input);
-	}
+	input.dashboardBoolean = dashboardBoolean;
+	input.objectArray = objectArray;
+	//! I have no clue why I didn't think of this sooner.
+	//! I could've saved myself so many headaches.
 
 	clearInputButton.addEventListener("click", function clearTheInput() {
 		input.value = "";
@@ -104,47 +133,16 @@ function addSearchFunctionality(objectArray, options = {}) {
 		renderToHtml(objectArray, { dashboardBoolean });
 	});
 
-	clearInputButton.addEventListener("keyup", function moveLeftOrEnter(e) {
-		//* Invoke click event when pressing enter
-		if (e.keyCode === 13) {
-			this.click();
-		}
-		//* Left arrow key
-		if (e.keyCode === 37) {
-			input.focus();
-		}
-	});
+	clearInputButton.addEventListener("keyup", moveLeftOrEnter);
 
-	input.addEventListener("keyup", function moveRightToButton(e) {
-		if (e.keyCode === 39) {
-			clearInputButton.focus();
-		}
-	});
+	input.addEventListener("keyup", moveRightToButton);
 
-	input.addEventListener("input", function handleInput() {
-		//* Render matching cards to the DOM
-		let filterString = input.value;
-		try {
-			renderToHtml(objectArray, { filterString, dashboardBoolean });
-		} catch (error) {
-			noResults();
-		}
-		//* Add matching items to suggestions list
-		addSuggestions(objectArray, { filterString, dashboardBoolean });
-	});
+	input.addEventListener("input", handleInput);
 
-	input.addEventListener("focus", function handleFocus() {
-		addSuggestions(objectArray, { filterString: input.value, dashboardBoolean });
-		suggestionList.classList.add("shown");
-		input.ariaExpanded = true;
-		suggestionList.tabIndex = 0;
-	});
+	input.addEventListener("focus", handleFocus);
 
 	//* When input is not in focus, hide suggestions so it doesn't cover the screen forever.
 
-	input.addEventListener("blur", function blurHandler() {
-		hideOnBlur(form, suggestionList);
-	});
-	dejavuChecker = true;
+	input.addEventListener("blur", blurHandler);
 }
 export default addSearchFunctionality;

@@ -1,6 +1,6 @@
 import searchArray from "./../libs/searchArray.js";
-import deleteHandler from "./deleteHandler.js";
-import { buildCardHtml, addFavouriteButtonEvents, addCartButtonEvents } from "./cardConstructor.js";
+import deleteHandler from "./dashboard/deleteHandler.js";
+import { buildCardHtml, addFavouriteButtonEvents, addCartButtonEvents } from "./card/cardConstructor.js";
 import { initializeTooltips } from "../libs/initializeTooltips.js";
 
 function renderToHtml(array, options = {}) {

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<title>PRODUCT - Ethereal</title>
+		<meta name="description" content="Add, edit and delete NFTs. Hell yeah" />
+		<!-- This snippet is taken from https://csswizardry.com/2020/05/the-fastest-google-fonts/ -->
+		<!-- [1] -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="preconnect" href="https://kit.fontawesome.com" crossorigin />
+		<!-- [2] -->
+		<link
+			rel="preload"
+			as="style"
+			href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&family=Syne:wght@700;800&display=swap"
+		/>
+		<!-- [3] -->
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&family=Syne:wght@700;800&display=swap"
+			media="all"
+			onload="this.media='all'"
+		/>
+		<!-- [4] -->
+		<noscript
+			><link
+				rel="stylesheet"
+				href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700&family=Syne:wght@700;800&display=swap"
+		/></noscript>
+		<link rel="stylesheet" href="./css/styles.css" />
+	</head>
+	<body>
+		<header class="navigation sticky-top">
+			<nav class="navigation__navbar navbar navbar-expand-md navbar-dark">
+				<div class="navigation__container container-fluid px-0">
+					<div class="navigation__left">
+						<button
+							class="navbar-toggler hamburger collapsed"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarList"
+							aria-controls="navbarList"
+							aria-expanded="false"
+							aria-label="Toggle navigation"
+						>
+							<span class="hamburger__box">
+								<span class="hamburger__inner"></span>
+							</span>
+						</button>
+						<a href="./index.html" class="navigation__logo-linkwrap navbar-brand py-0">
+							<img src="./media/Logo.svg" alt="Ethereal Logo" class="navigation__logo" width="158" height="54" />
+						</a>
+					</div>
+					<div class="navigation__middle">
+						<div class="navigation__width-expander collapse navbar-collapse" id="navbarList">
+							<ul class="navbar-nav me-auto mb-lg-0 navigation__navlist">
+								<li class="nav-item navigation__item">
+									<a href="./index.html" class="nav-link navigation__link">
+										<span>Home</span><i class="fal fa-home fa-fw"></i>
+									</a>
+								</li>
+								<li class="nav-item navigation__item active">
+									<a href="./marketplace.html" aria-current="page" class="nav-link navigation__link">
+										<span>Marketplace</span><i class="fal fa-gem fa-fw"></i>
+									</a>
+								</li>
+								<li class="nav-item navigation__item">
+									<a href="./favourites.html" class="nav-link navigation__link">
+										<span>Favourites</span><i class="fal fa-heart fa-fw"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="navigation__right">
+						<div class="navigation__iconbuttons">
+							<div class="navigation__iconbtn-wrap">
+								<button
+									aria-label="User menu"
+									class="navigation__iconbtn navigation__iconbtn--signin"
+									data-bs-toggle="offcanvas"
+									data-bs-target="#offcanvas"
+									data-canvas="login"
+									data-bs-tooltip="tooltip"
+									data-bs-trigger="hover"
+									data-bs-placement="bottom"
+									title="Sign in"
+								>
+									<span class="fa-layers fa-fw no-user show">
+										<i class="fa-regular fa-user"></i>
+										<span class="fa-regular layer-icon fa-sign-in" data-fa-transform="shrink-6 right-12"></span>
+									</span>
+									<span class="fa-layers fa-fw yes-user hide">
+										<i class="fa-light fa-user-crown"></i>
+										<span class="fa-regular layer-icon fa-cog" data-fa-transform="shrink-6 right-12"></span>
+									</span>
+								</button>
+							</div>
+							<div class="navigation__iconbtn-wrap">
+								<button
+									aria-label="View your cart"
+									class="navigation__iconbtn navigation__iconbtn--cart"
+									data-bs-toggle="offcanvas"
+									data-bs-target="#offcanvas"
+									data-canvas="cart"
+									data-bs-tooltip="tooltip"
+									data-bs-trigger="hover"
+									data-bs-placement="bottom"
+									title="View your cart"
+								>
+									<span class="fa-layers fa-fw">
+										<i class="fa-regular fa-shopping-cart"></i>
+										<span class="navigation__counter fa-layers-counter">0</span>
+									</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+			<div class="offcanvas__inner"></div>
+		</div>
+		<main class="main main--product position-relative">
+			<article class="product">
+				<div class="product__content">
+					<div class="container-fluid product__container"></div>
+				</div>
+			</article>
+		</main>
+		<footer class="footer">
+			<h2 class="visually-hidden">Footer</h2>
+			<div class="footer__content d-flex">
+				<div class="footer__logo">
+					<img src="./media/Logo.svg" alt="Ethereal Logo" class="footer__img" width="158" height="54" />
+				</div>
+
+				<div class="footer__text">
+					<small class="footer__crtext">© 2021 Ethereal. No rights reserved</small>
+					<small class="footer__disclaimer">
+						This website was made as part of a school assignment and does not offer any real services whatsoever.
+						It's&nbsp;all&nbsp;fake. And for the record, NFTs are stupid.
+					</small>
+				</div>
+				<div class="footer__buttonwrap">
+					<button
+						aria-label="Back to top"
+						class="footer__elevator navigation__iconbtn"
+						data-bs-tooltip="tooltip"
+						data-bs-trigger="hover"
+						data-bs-placement="top"
+						title="Back to top"
+					>
+						<i class="fal fa-arrow-square-up"></i>
+					</button>
+				</div>
+			</div>
+		</footer>
+		<!-- Import Axios -->
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<!-- Import FontAwesome -->
+		<script src="https://kit.fontawesome.com/c235a816ca.js" crossorigin="anonymous"></script>
+		<script src="./bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
+		<script type="module" src="./js/product.js"></script>
+	</body>
+</html>

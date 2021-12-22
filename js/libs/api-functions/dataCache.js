@@ -8,7 +8,7 @@ const dataCache = async () => {
 		if (getFromSession("strapi-data")[0] === undefined) {
 			let productsArray = await fetchData(`${BASE_URL}/products`);
 			saveToSession("strapi-data", productsArray);
-			console.log("running");
+			console.log("I made an API call");
 		}
 		return getFromSession("strapi-data");
 	} catch (error) {

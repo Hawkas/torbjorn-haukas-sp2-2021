@@ -38,11 +38,11 @@ export const arrowKeyNavigation = function (e, element, parentContainer, input) 
 	}
 };
 
-
 export const signOut = function () {
 	localStorage.removeItem("user");
 	localStorage.removeItem("jwt");
-	console.log(window.location.href);
+	let dashboardUrl = window.location.origin + "/dashboard.html";
+	if (toString(window.location.href) === dashboardUrl) window.location.href = "./index.html";
 };
 
 export const toggleDisabled = function () {

@@ -80,13 +80,14 @@ button,
 		display: none;
 	}
 	&.remove-from-cart,
-	&.cards__delete {
+	&.cards__delete,
+	&.button__red {
 		background-color: #cd4a47;
 		color: $white;
 		transition: 0.25s ease-in-out;
-		&:hover,
-		&:focus {
-			background-color: rgba($color: $red, $alpha: 0.6);
+		&:not(:disabled):hover,
+		&:not(:disabled):focus {
+			background-color: rgba($color: $red, $alpha: 0.8);
 			color: $on-surface;
 		}
 		& .fa-slash {

@@ -6,7 +6,7 @@ export const initializeTooltips = function () {
 		tooltipTriggerEl.addEventListener("focusin", () => {
 			let focusType = window.getComputedStyle(tooltipTriggerEl).getPropertyValue("outline");
 			let actuallyFocused = "rgb(79, 250, 202) outset 3px";
-			//^^ If my focus styling changes it wont show on focus. It won't change though.
+			//^^ If my focus styling changes it wont show on focus. This is very silly.
 			if (focusType === actuallyFocused) {
 				tooltip.show();
 			}

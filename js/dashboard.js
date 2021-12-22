@@ -1,9 +1,8 @@
-import fetchData from "./libs/api-functions/fetchData.js";
 import renderToHtml from "./components/renderToHtml.js";
 import addSearchFunctionality from "./components/addSearchFunctionality.js";
-import dashboardModal from "./components/dashboardModal.js";
+import dashboardModal from "./components/dashboard/dashboardModal.js";
 import { apiError, emptyApi } from "./components/staticErrorMessage.js";
-import adjustInterface from "./components/adjustInterface.js";
+import adjustInterface from "./components/navigation/adjustInterface.js";
 import dataCache from "./libs/api-functions/dataCache.js";
 
 adjustInterface();
@@ -18,7 +17,7 @@ try {
 		// Render all items in API call to DOM and add handlers
 	} catch (error) {
 		console.error(error);
-		emptyApi(); // If this error message is thrown, it's a problem
+		emptyApi(); // You dun goofed. The API is empty.
 	}
 } catch (error) {
 	console.error(error);
